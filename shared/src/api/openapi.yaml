@@ -1,0 +1,431 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  description: API для ЕСЦ БГТУ "ВОЕНМЕХ"
+  version: "1.0.0"
+paths:
+  /api/v1/student/queue:
+    get:
+      summary: Получить информацию об очереди студента
+      tags:
+        - Student
+      parameters:
+        - name: deviceId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentQueueResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Записаться в очередь
+      tags:
+        - Student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentQueueRequest'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentQueueResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/login:
+    post:
+      summary: Авторизация сотрудника
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeLoginRequest'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/tokens/refresh:
+    post:
+      summary: Обновить токены
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/shifts:
+    get:
+      summary: Получить статус стола
+      tags:
+        - Shifts
+      security:
+        - Authorization: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftStatusResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/shifts/open:
+    post:
+      summary: Занять стол
+      tags:
+        - Shifts
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShiftOpenRequest'
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftOpenResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/shifts/close:
+    post:
+      summary: Покинуть стол
+      tags:
+        - Shifts
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShiftCloseResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/tables:
+    get:
+      summary: Получить информацию о столах
+      tags:
+        - Tables
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TableInfo'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/queue/next:
+    post:
+      summary: Перейти к следующему талону
+      tags:
+        - Tables
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueNextResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/queue/count:
+    get:
+      summary: Получить количество активных талонов
+      tags:
+        - Tables
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueCountResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/queue/status:
+    get:
+      summary: Получить текущий талон
+      tags:
+        - Queue
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStatusResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/queue/clear:
+    delete:
+      summary: Очистить очередь
+      tags:
+        - Queue
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueClearResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/employee/queue/coupon:
+    get:
+      summary: Получить информацию о талоне
+      tags:
+        - Queue
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: couponId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueCouponResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    Authorization:
+      description: Authorization
+      scheme: bearer
+      type: http
+  schemas:
+    EmployeeLoginRequest:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+      required:
+        - login
+        - password
+    TokenRefreshRequest:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+      required:
+        - accessToken
+        - refreshToken
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+    StudentQueueRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+          nullable: true
+        studentGroup:
+          type: string
+          nullable: true
+        deviceId:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - deviceId
+    StudentQueueResponse:
+      type: object
+      properties:
+        passNumber:
+          type: integer
+          nullable: true
+        status:
+          type: string
+          nullable: true
+    ShiftStatusResponse:
+      type: object
+      properties:
+        tableId:
+          type: integer
+          nullable: true
+    ShiftOpenRequest:
+      type: object
+      properties:
+        tableId:
+          type: integer
+      required:
+        - tableId
+    ShiftOpenResponse:
+      type: object
+      properties:
+        tableId:
+          type: integer
+    ShiftCloseResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    TableInfo:
+      type: object
+      properties:
+        tableId:
+          type: integer
+        employeeFormatted:
+          type: string
+          nullable: true
+    QueueNextResponse:
+      type: object
+      properties:
+        couponId:
+          type: integer
+          nullable: true
+    QueueCountResponse:
+      type: object
+      properties:
+        coupons:
+          type: integer
+    QueueStatusResponse:
+      type: object
+      properties:
+        couponId:
+          type: integer
+          nullable: true
+    QueueClearResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    QueueCouponResponse:
+      type: object
+      properties:
+        passNumber:
+          type: integer
+          nullable: true
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+          nullable: true
+        studentGroup:
+          type: string
+          nullable: true
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
