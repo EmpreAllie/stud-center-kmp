@@ -33,7 +33,7 @@ fun MainTheme(
     }
 }
 
-fun mainTextFont(context: Context) = FontFamily( Font(resId = MultiplatformResource.fonts.regular.fontResourceId) )
+fun mainTextFont(context: Context) = FontFamily( Font(resId = MultiplatformResource.fonts.inter.fontResourceId) )
 fun localColors(context: Context) = compositionLocalOf <Colors> { Colors.Light(context) }
 fun localTypography(context: Context) = compositionLocalOf { Typography(mainTextFont(context)) }
 

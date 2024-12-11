@@ -9,31 +9,31 @@ extension ResourcesFontResource {
 
 extension SwiftUI.Font {
     static func regular(size: Double = 14.0) -> Font {
-        let uiFont = MultiplatformResource.fonts()[keyPath: \.regular].uiFont(withSize: size)
+        let uiFont = MultiplatformResource.fonts()[keyPath: \.inter].uiFont(withSize: size)
         
         return Font.init(uiFont)
     }
     
     static func italic(size: Double = 14.0) -> Font {
-        let uiFont = MultiplatformResource.fonts()[keyPath: \.regular].uiFont(withSize: size)
+        let uiFont = MultiplatformResource.fonts()[keyPath: \.inter].uiFont(withSize: size)
         
         return Font.init(uiFont)
     }
     
     static func bold(size: Double = 14.0) -> Font {
-        let uiFont = MultiplatformResource.fonts()[keyPath: \.regular].uiFont(withSize: size)
+        let uiFont = MultiplatformResource.fonts()[keyPath: \.inter].uiFont(withSize: size)
         
         return Font.init(uiFont)
     }
     
     static func semibold(size: Double = 14.0) -> Font {
-        let uiFont = MultiplatformResource.fonts()[keyPath: \.regular].uiFont(withSize: size)
+        let uiFont = MultiplatformResource.fonts()[keyPath: \.inter].uiFont(withSize: size)
         
         return Font.init(uiFont)
     }
     
     static func medium(size: Double = 14.0) -> Font {
-        let uiFont = MultiplatformResource.fonts()[keyPath: \.regular].uiFont(withSize: size)
+        let uiFont = MultiplatformResource.fonts()[keyPath: \.inter].uiFont(withSize: size)
         
         return Font.init(uiFont)
     }

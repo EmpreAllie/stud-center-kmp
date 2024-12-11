@@ -1,5 +1,6 @@
 package com.studcenter.screen.splash
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,8 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.studcenter.ui.R as A
 import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
 
@@ -19,15 +24,16 @@ fun SplashScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .background(B.colors().white),
+            .background(B.colors().white)
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Text(
-            text = "Widmeyer Template",
-            style = B.typography().text.title,
-            color = B.colors().secondary
+        Image(
+            modifier = Modifier
+                .scale(1.5f),
+            painter = painterResource(id = A.drawable.logo_app),
+            contentDescription = "StudyCenter",
         )
     }
 }
