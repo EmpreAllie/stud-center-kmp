@@ -17,6 +17,11 @@ import com.studcenter.data.utils.Log
 import com.studcenter.entity.enums.ErrorType
 import com.studcenter.root.di.startKoin
 import com.studcenter.root.presentation.RootViewModel
+import com.studcenter.screen.authorization.AuthorizationScreen
+import com.studcenter.screen.display.DisplayScreen
+import com.studcenter.screen.menu.MenuScreen
+import com.studcenter.screen.record.RecordScreen
+import com.studcenter.screen.role.RoleScreen
 import com.studcenter.screen.splash.SplashScreen
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.koin.androidContext
@@ -83,17 +88,29 @@ fun RootApp(viewModel: RootViewModel) {
     }
 
     NavHost(navController = navController, startDestination = Screen.SPLASH.toString()) {
+        composable(Screen.AUTHORIZATION.toString()) {
+            AuthorizationScreen()
+            BackHandler(true) {}
+        }
+        composable(Screen.DISPLAY.toString()) {
+            DisplayScreen()
+            BackHandler(true) {}
+        }
+        composable(Screen.MENU.toString()) {
+            MenuScreen()
+            BackHandler(true) {}
+        }
+        composable(Screen.RECORD.toString()) {
+            RecordScreen()
+            BackHandler(true) {}
+        }
+        composable(Screen.ROLE.toString()) {
+            RoleScreen()
+            BackHandler(true) {}
+        }
         composable(Screen.SPLASH.toString()) {
             SplashScreen()
             BackHandler(true) {}
         }
-     /*   composable(Screen.AUTHORIZATION.toString()) {
-            AuthorizationScreen()
-            BackHandler(true) {}
-        }
-        composable(Screen.MAIN.toString()) {
-            MainScreen()
-            BackHandler(true) {}
-        }*/
     }
 }

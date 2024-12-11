@@ -7,8 +7,17 @@ enum class Screen {
     AUTHORIZATION {
         override fun toString() = "authorization"
     },
-    MAIN {
-        override fun toString() = "main"
+    DISPLAY {
+        override fun toString() = "display"
+    },
+    MENU {
+        override fun toString() = "menu"
+    },
+    RECORD {
+        override fun toString() = "record"
+    },
+    ROLE {
+        override fun toString() = "role"
     };
 
     abstract override fun toString(): String

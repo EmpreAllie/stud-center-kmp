@@ -1,4 +1,4 @@
-package com.studcenter.features.screen.presentation
+package com.studcenter.features.display.presentation
 
 import com.studcenter.base.features.StateFlow
 import com.studcenter.base.features.ViewModel

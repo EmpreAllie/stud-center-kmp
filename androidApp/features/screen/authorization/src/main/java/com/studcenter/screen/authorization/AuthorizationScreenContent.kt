@@ -1,4 +1,4 @@
-package com.studcenter.features.screen.authorization
+package com.studcenter.screen.authorization
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

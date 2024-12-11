@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="appName">ЕСЦ Очередь</string>
 	<string name="errorTitle">Произошла ошибка!</string>
 	<string name="errorDescription_Template">Произошла непредвиденная ошибка, пожалуйста, попробуйте ещё раз или повторите позднее. Если ошибка не исчезает, то попробуйте связаться со службой поддержки</string>
 	<string name="studCenter">Единый студенческий центр</string>

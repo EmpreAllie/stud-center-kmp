@@ -18,7 +18,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "screen"
+            baseName = "menu"
             isStatic = true
         }
     }
@@ -47,7 +47,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.studcenter.features.***."
+    namespace = "com.studcenter.features.menu"
     compileSdk = 34
     defaultConfig {
         minSdk = 24

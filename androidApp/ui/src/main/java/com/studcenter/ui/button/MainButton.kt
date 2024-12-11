@@ -36,7 +36,7 @@ fun MainButton(
     text: String,
     isFillWidth: Boolean = true,
     contentColor: Color = B.colors().white,
-    contentPadding: PaddingValues = if (isFillWidth) PaddingValues() else PaddingValues(16.dp),
+    contentPadding: PaddingValues = PaddingValues(vertical = 16.dp),
     textStyle: TextStyle = B.typography().text.buttonText,
     backgroundColor: Color = B.colors().secondary,
     cornerShapeSize: Dp = 5.dp,
@@ -51,7 +51,6 @@ fun MainButton(
             .clip(RoundedCornerShape(cornerShapeSize))
             .background(if (isEnabled) backgroundColor else disabledColor)
             .then(if (isFillWidth) Modifier.fillMaxWidth() else Modifier)
-            .height(56.dp)
             .clickable {
                 if (isEnabled && !isLoading) {
                     onClick()

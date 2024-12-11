@@ -1,4 +1,4 @@
-package com.studcenter.features.screen.record
+package com.studcenter.screen.record
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

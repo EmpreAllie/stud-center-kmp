@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.sp
 @Immutable
 data class Typography(private val mainTextFont: FontFamily) {
     val text: TitleTypography = TitleTypography(mainTextFont)
+    val role: RoleTypography = RoleTypography(mainTextFont)
 }
 
 @Immutable
@@ -50,6 +51,25 @@ data class TitleTypography(
     val hintText: TextStyle = TextStyle(
         fontSize = 16.sp,
         lineHeight = 28.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W400
+    ).preciseLineHeight()
+}
+
+@Immutable
+data class RoleTypography(
+    private val mainTextFont: FontFamily,
+) {
+    val title: TextStyle = TextStyle(
+        fontSize = 40.sp,
+        lineHeight = 50.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W600
+    ).preciseLineHeight()
+
+    val button: TextStyle = TextStyle(
+        fontSize = 20.sp,
+        lineHeight = 22.sp,
         fontFamily = mainTextFont,
         fontWeight = FontWeight.W400
     ).preciseLineHeight()

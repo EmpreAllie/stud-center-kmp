@@ -18,7 +18,7 @@ fun AuthorizationScreen() {
     val context = LocalContext.current
     val activity = context as? ComponentActivity ?: throw IllegalStateException("Context is not an instance of ComponentActivity")
 
-    val viewModel: ScreenViewModel = remember { getKoin().get() }
+    val viewModel: AuthorizationViewModel = remember { getKoin().get() }
     val rootViewModel: RootViewModel = remember { getKoin().get() }
 
     val errorText by viewModel.errorText.state.collectAsState()

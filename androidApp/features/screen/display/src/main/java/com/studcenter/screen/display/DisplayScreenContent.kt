@@ -1,4 +1,4 @@
-package com.studcenter.features.screen.display
+package com.studcenter.screen.display
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

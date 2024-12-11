@@ -10,7 +10,6 @@ import androidx.compose.ui.platform.LocalContext
 import com.studcenter.features.display.presentation.DisplayViewModel
 import com.studcenter.root.presentation.RootViewModel
 import com.studcenter.ui.MainTheme
-import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.getKoin
 
 @Composable
