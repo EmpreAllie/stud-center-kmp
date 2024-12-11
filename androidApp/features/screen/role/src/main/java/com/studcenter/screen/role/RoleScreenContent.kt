@@ -1,4 +1,4 @@
-package com.studcenter.features.screen.***
+package com.studcenter.features.screen.role
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,7 @@ import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
 
 @Composable
-fun ScreenContent() {
+fun RoleScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,8 +34,8 @@ fun ScreenContent() {
 
 @Composable
 @Preview
-internal fun ScreenContent_Preview() {
+internal fun RoleScreenContent_Preview() {
     MainTheme {
-        ScreenContent()
+        RoleScreenContent()
     }
 }
