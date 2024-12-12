@@ -31,14 +31,9 @@ import com.studcenter.ui.button.MainButton
 @Composable
 fun RecordScreenContent(
     firstName: String,
-    firstNameError: String?,
     lastName: String,
-    lastNameError: String?,
     middleName: String,
-    middleNameError: String?,
     group: String,
-    groupError: String?,
-    onClearError: () -> Unit,
     onAccept: () -> Unit,
     onSetScreen: (Screen?) -> Unit,
 ) {
@@ -91,11 +86,6 @@ fun RecordScreenContent(
                     singleLine = true,
                     maxLines = 2,
                     text = lastName,
-                    errorText = lastNameError,
-                    isError = lastNameError.isNullOrBlank(),
-                    onTextChange = {
-                        onClearError()
-                    }
                 )
 
                 InputTextField(
@@ -105,11 +95,6 @@ fun RecordScreenContent(
                     singleLine = true,
                     maxLines = 2,
                     text = firstName,
-                    errorText = firstNameError,
-                    isError = firstNameError.isNullOrBlank(),
-                    onTextChange = {
-                        onClearError()
-                    }
                 )
 
                 InputTextField(
@@ -119,11 +104,6 @@ fun RecordScreenContent(
                     singleLine = true,
                     maxLines = 2,
                     text = middleName,
-                    errorText = middleNameError,
-                    isError = middleNameError.isNullOrBlank(),
-                    onTextChange = {
-                        onClearError()
-                    }
                 )
 
                 InputTextField(
@@ -133,11 +113,6 @@ fun RecordScreenContent(
                     singleLine = true,
                     maxLines = 2,
                     text = group,
-                    errorText = groupError,
-                    isError = groupError.isNullOrBlank(),
-                    onTextChange = {
-                        onClearError()
-                    }
                 )
             }
         }
@@ -165,14 +140,9 @@ internal fun RecordScreenContent_Preview() {
     MainTheme {
         RecordScreenContent(
             firstName = "ss",
-            firstNameError = "",
             lastName = "",
-            lastNameError = "",
             middleName = "",
-            middleNameError = "",
             group = "",
-            groupError = "",
-            onClearError = {},
             onAccept = {},
             onSetScreen = {})
     }

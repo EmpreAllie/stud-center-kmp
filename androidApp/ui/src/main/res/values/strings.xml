@@ -33,6 +33,7 @@
 	<string name="numberGroup">Номер группы</string>
 	<string name="numberGroup_Required">Номер группы*</string>
 	<string name="yourPosition">Ваша позиция</string>
+	<string name="fieldIsEmptyRecord">Пожалуйста, заполните все необходимые поля для записи в очередь!</string>
 	<string name="status">Статус</string>
 	<string name="authorization">Авторизация</string>
 	<string name="login">Логин</string>

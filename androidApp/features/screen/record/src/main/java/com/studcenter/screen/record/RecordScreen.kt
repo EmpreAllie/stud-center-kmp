@@ -8,9 +8,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import com.studcenter.base.features.enum.Screen
+import com.studcenter.base.features.enum.StateScreen
+import com.studcenter.data.utils.localize
 import com.studcenter.features.record.presentation.RecordViewModel
+import com.studcenter.resources.MultiplatformResource
 import com.studcenter.root.presentation.RootViewModel
+import com.studcenter.ui.LoadingContentFull
 import com.studcenter.ui.MainTheme
+import com.studcenter.ui.dialog.DialogError
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.getKoin
 
@@ -22,22 +28,31 @@ fun RecordScreen() {
     val viewModel: RecordViewModel = remember { getKoin().get() }
     val rootViewModel: RootViewModel = remember { getKoin().get() }
 
+    val errorText by viewModel.errorText.state.collectAsState()
+    val stateScreen by viewModel.stateScreen.state.collectAsState()
+    val isCreatedRecord by viewModel.isCreatedRecord.state.collectAsState()
+
     val firstName by remember { mutableStateOf("") }
     val lastName by remember { mutableStateOf("") }
     val middleName by remember { mutableStateOf("") }
     val group by remember { mutableStateOf("") }
 
+    LaunchedEffect(key1 = isCreatedRecord) {
+        if (isCreatedRecord) {
+            rootViewModel.updateScreen(
+                screen = Screen.DISPLAY,
+                argumentsJson = emptyList(),
+                isClear = false
+            )
+        }
+    }
+
     MainTheme {
         RecordScreenContent(
             firstName = firstName,
-            firstNameError = viewModel.firstNameError.state.collectAsState().value,
             lastName = lastName,
-            lastNameError = viewModel.lastNameError.state.collectAsState().value,
             middleName = middleName,
-            middleNameError = viewModel.middleNameError.state.collectAsState().value,
             group = group,
-            groupError = viewModel.groupError.state.collectAsState().value,
-            onClearError = viewModel::clearErrorText,
             onAccept = {
                 viewModel.createRecord(
                     firstName = firstName,
@@ -58,5 +73,18 @@ fun RecordScreen() {
                 }
             },
         )
+
+        if (!errorText.isNullOrBlank()) {
+            DialogError(
+                title = MultiplatformResource.strings.errorTitle.localize(),
+                description = errorText ?: MultiplatformResource.strings.errorDescription_Template.localize()
+            ) {
+                viewModel.clearErrorText()
+            }
+        }
+
+        if (stateScreen == StateScreen.LOADING) {
+            LoadingContentFull()
+        }
     }
 }

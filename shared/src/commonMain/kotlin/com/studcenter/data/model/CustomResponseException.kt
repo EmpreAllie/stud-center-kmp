@@ -8,7 +8,6 @@ class CustomResponseException(
     request: HttpRequest,
     response: HttpResponse,
     responseMessage: String,
-    val responseTitle: String,
     val responseStatus: Int
 ) : ResponseException(request, response, responseMessage) {
     @Suppress("MagicNumber")

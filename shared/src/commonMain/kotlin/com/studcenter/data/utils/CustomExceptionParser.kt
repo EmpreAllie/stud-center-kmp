@@ -22,15 +22,12 @@ class CustomExceptionParser(private val json: Json) : HttpExceptionFactory.HttpE
         return try {
             val body = responseBody.orEmpty()
             val jsonObject = json.parseToJsonElement(body).jsonObject
-            val responseTitle = jsonObject.get(ERROR_TITLE)?.jsonPrimitive?.content.orEmpty()
             val responseMessage = jsonObject.get(ERROR_MESSAGE)?.jsonPrimitive?.content.orEmpty()
-            val responseStatus: Int = jsonObject.get(ERROR_STATUS)?.jsonPrimitive?.int ?: 0
             CustomResponseException(
                 request = request,
                 response = response,
-                responseTitle = responseTitle,
                 responseMessage = responseMessage,
-                responseStatus = responseStatus
+                responseStatus = response.status.value
             )
         } catch (exception: Exception) {
             null
@@ -38,8 +35,6 @@ class CustomExceptionParser(private val json: Json) : HttpExceptionFactory.HttpE
     }
 
     companion object {
-        private const val ERROR_TITLE = "title"
-        private const val ERROR_MESSAGE = "detail"
-        private const val ERROR_STATUS = "status"
+        private const val ERROR_MESSAGE = "message"
     }
 }
