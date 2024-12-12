@@ -9,4 +9,6 @@ class KeyValueStorage(private val settings: Settings) {
 
     var accessToken by settings.nullableString("access_token")
     var refreshToken by settings.nullableString("refresh_token")
+
+    var deviceId by settings.nullableString("deviceId")
 }

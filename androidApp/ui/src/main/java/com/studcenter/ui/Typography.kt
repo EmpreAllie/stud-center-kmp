@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 data class Typography(private val mainTextFont: FontFamily) {
     val text: TitleTypography = TitleTypography(mainTextFont)
     val role: RoleTypography = RoleTypography(mainTextFont)
+    val record: RecordTypography = RecordTypography(mainTextFont)
 }
 
 @Immutable
@@ -74,6 +75,33 @@ data class RoleTypography(
         fontWeight = FontWeight.W400
     ).preciseLineHeight()
 }
+
+@Immutable
+data class RecordTypography(
+    private val mainTextFont: FontFamily,
+) {
+    val title: TextStyle = TextStyle(
+        fontSize = 40.sp,
+        lineHeight = 50.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W600
+    ).preciseLineHeight()
+
+    val text: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W600
+    ).preciseLineHeight()
+
+    val button: TextStyle = TextStyle(
+        fontSize = 20.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W400
+    ).preciseLineHeight()
+}
+
 
 fun TextStyle.preciseLineHeight(): TextStyle = this.copy(
     platformStyle = PlatformTextStyle(
