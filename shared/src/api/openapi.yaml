@@ -125,7 +125,7 @@ paths:
       tags:
         - Shifts
       security:
-        - bearerAuth: []
+        - Authorization: []
       requestBody:
         required: true
         content:
@@ -151,7 +151,7 @@ paths:
       tags:
         - Shifts
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         "200":
           description: Успешный ответ
@@ -171,7 +171,7 @@ paths:
       tags:
         - Tables
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         "200":
           description: Успешный ответ
@@ -193,7 +193,7 @@ paths:
       tags:
         - Tables
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         "200":
           description: Успешный ответ
@@ -213,7 +213,7 @@ paths:
       tags:
         - Tables
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         "200":
           description: Успешный ответ
@@ -233,7 +233,7 @@ paths:
       tags:
         - Queue
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         "200":
           description: Успешный ответ
@@ -253,7 +253,7 @@ paths:
       tags:
         - Queue
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         "200":
           description: Успешный ответ
@@ -273,7 +273,7 @@ paths:
       tags:
         - Queue
       security:
-        - bearerAuth: []
+        - Authorization: []
       parameters:
         - name: couponId
           in: query
