@@ -57,7 +57,7 @@ fun RoleScreenContent(
             modifier = Modifier
                 .padding(bottom = 32.dp),
             text = styledText,
-            style = B.typography().role.title,
+            style = B.typography().main.bigText,
             color = B.colors().white
         )
 
@@ -75,7 +75,7 @@ fun RoleScreenContent(
                 modifier = Modifier
                     .padding(start = 32.dp, end = 32.dp, bottom = 24.dp),
                 text = MultiplatformResource.strings.student.localize(),
-                textStyle = B.typography().role.button,
+                textStyle = B.typography().main.button,
                 backgroundColor = B.colors().white,
                 cornerShapeSize = 12.dp,
                 contentColor = B.colors().secondary,
@@ -88,7 +88,7 @@ fun RoleScreenContent(
                 modifier = Modifier
                     .padding(start = 32.dp, end = 32.dp, bottom = 16.dp),
                 text = MultiplatformResource.strings.employee.localize(),
-                textStyle = B.typography().role.button,
+                textStyle = B.typography().main.button,
                 backgroundColor = B.colors().white,
                 cornerShapeSize = 12.dp,
                 contentColor = B.colors().secondary,

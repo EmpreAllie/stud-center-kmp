@@ -66,7 +66,7 @@ fun RecordScreenContent(
             modifier = Modifier
                 .padding(bottom = 24.dp, start = 16.dp, end = 16.dp),
             text = MultiplatformResource.strings.onlineRecord.localize(),
-            style = B.typography().record.title,
+            style = B.typography().main.bigText,
             color = B.colors().white,
             textAlign = TextAlign.Center
         )
@@ -121,7 +121,7 @@ fun RecordScreenContent(
             modifier = Modifier
                 .padding(bottom = 8.dp),
             text = MultiplatformResource.strings.accept.localize(),
-            textStyle = B.typography().record.button,
+            textStyle = B.typography().main.button,
             backgroundColor = B.colors().white,
             cornerShapeSize = 100.dp,
             contentColor = B.colors().secondary,

@@ -8,6 +8,9 @@ object Constants {
         val HOUR = SECOND * 60
 
         val delaySplash = SECOND * 2
+        val displayUpdateMs = SECOND * 5
+
+        val passNumberNull = 401
     }
 
     object Strings {
