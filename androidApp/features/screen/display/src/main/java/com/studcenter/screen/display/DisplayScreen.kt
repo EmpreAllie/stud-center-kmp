@@ -29,6 +29,12 @@ fun DisplayScreen() {
     val errorText by viewModel.errorText.state.collectAsState()
     val isCloseScreen by viewModel.isCloseScreen.state.collectAsState()
 
+    LaunchedEffect(isCloseScreen) {
+        if (isCloseScreen) {
+            rootViewModel.finishScreen()
+        }
+    }
+
     MainTheme {
         DisplayScreenContent(
             positionFormatted = viewModel.positionFormatted.state.collectAsState().value,

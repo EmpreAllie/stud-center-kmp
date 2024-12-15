@@ -11,12 +11,14 @@ object Constants {
         val displayUpdateMs = SECOND * 5
 
         val passNumberNull = 401
+        val maxLenghtField = 16
     }
 
     object Strings {
         val errorConnection: String = "Нет подключения к интернету"
 
         object SYSTEM {
+            val mailSupport: String = "studcenter@voenmeh.ru"
         }
     }
 
