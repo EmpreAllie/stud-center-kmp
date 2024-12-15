@@ -37,7 +37,9 @@
 	<string name="status">Статус</string>
 	<string name="authorization">Авторизация</string>
 	<string name="login">Логин</string>
+	<string name="loginError">Логин должен содержать от 4 до 16 символов, состоять только из латинских букв и цифр, без пробелов и специальных символов.</string>
 	<string name="password">Пароль</string>
+	<string name="passwordError">Пароль должен содержать от 4 до 16 символов, состоять только из латинских букв и цифр, без пробелов и специальных символов.</string>
 	<string name="enter">Войти</string>
 	<string name="support">Помощь</string>
 	<string name="supportService">Служба поддержки</string>
