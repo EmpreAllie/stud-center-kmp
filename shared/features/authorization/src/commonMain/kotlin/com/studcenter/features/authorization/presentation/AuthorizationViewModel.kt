@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.log
 
 class AuthorizationViewModel(private val repository: AuthorizationRepository): ViewModel() {
     val errorText: StateFlow<String?> = StateFlow(null)

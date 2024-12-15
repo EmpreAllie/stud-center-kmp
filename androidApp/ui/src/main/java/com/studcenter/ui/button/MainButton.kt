@@ -37,6 +37,8 @@ fun MainButton(
     isFillWidth: Boolean = true,
     contentColor: Color = B.colors().white,
     contentPadding: PaddingValues = PaddingValues(vertical = 16.dp),
+    contentAlignment: Alignment = Alignment.Center,
+    textAlign: TextAlign = TextAlign.Center,
     textStyle: TextStyle = B.typography().text.buttonText,
     backgroundColor: Color = B.colors().secondary,
     cornerShapeSize: Dp = 5.dp,
@@ -56,7 +58,7 @@ fun MainButton(
                     onClick()
                 }
             },
-        contentAlignment = Alignment.Center,
+        contentAlignment = contentAlignment,
     ) {
         if (isLoading) {
             CircularProgressIndicator(
@@ -76,7 +78,7 @@ fun MainButton(
             text = text,
             style = textStyle,
             color = if (isEnabled) contentColor else disabledContentColor,
-            textAlign = TextAlign.Center,
+            textAlign = textAlign,
         )
     }
 }

@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.sp
 data class Typography(private val mainTextFont: FontFamily) {
     val text: TitleTypography = TitleTypography(mainTextFont)
     val main: MainTypography = MainTypography(mainTextFont)
+    val menu: MenuTypography = MenuTypography(mainTextFont)
+    val navigation: NavigationTypography = NavigationTypography(mainTextFont)
 }
 
 @Immutable
@@ -89,6 +91,58 @@ data class MainTypography(
     ).preciseLineHeight()
 }
 
+
+@Immutable
+data class MenuTypography(
+    private val mainTextFont: FontFamily,
+) {
+    val title: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W400
+    ).preciseLineHeight()
+
+    val tableDescription: TextStyle = TextStyle(
+        fontSize = 16.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W400
+    ).preciseLineHeight()
+
+    val itemKey: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W600
+    ).preciseLineHeight()
+
+    val itemValue: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W400
+    ).preciseLineHeight()
+}
+
+@Immutable
+data class NavigationTypography(
+    private val mainTextFont: FontFamily,
+) {
+    val title: TextStyle = TextStyle(
+        fontSize = 28.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W600
+    ).preciseLineHeight()
+
+    val button: TextStyle = TextStyle(
+        fontSize = 20.sp,
+        lineHeight = 22.sp,
+        fontFamily = mainTextFont,
+        fontWeight = FontWeight.W400
+    ).preciseLineHeight()
+}
 
 fun TextStyle.preciseLineHeight(): TextStyle = this.copy(
     platformStyle = PlatformTextStyle(
