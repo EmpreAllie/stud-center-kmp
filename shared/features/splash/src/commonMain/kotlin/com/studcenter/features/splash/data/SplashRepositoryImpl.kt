@@ -47,7 +47,7 @@ class SplashRepositoryImpl(private val configParams: ConfigParams, private val a
         } catch (e: Throwable) {
             e.printStackTrace()
 
-            return false
+            throw e
         }
     }
 }

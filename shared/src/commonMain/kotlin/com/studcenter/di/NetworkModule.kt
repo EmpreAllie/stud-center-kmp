@@ -10,9 +10,11 @@ import dev.icerock.moko.network.createHttpClientEngine
 import dev.icerock.moko.network.exceptionfactory.HttpExceptionFactory
 import dev.icerock.moko.network.exceptionfactory.parser.ValidationExceptionParser
 import dev.icerock.moko.network.generated.apis.AuthenticationApi
+import dev.icerock.moko.network.generated.apis.NotificationApi
 import dev.icerock.moko.network.generated.apis.QueueApi
 import dev.icerock.moko.network.generated.apis.ShiftsApi
 import dev.icerock.moko.network.generated.apis.StudentApi
+import dev.icerock.moko.network.generated.apis.TablesApi
 import dev.icerock.moko.network.generated.models.TokenRefreshRequest
 import dev.icerock.moko.network.plugins.ExceptionPlugin
 import dev.icerock.moko.network.plugins.RefreshTokenPlugin
@@ -68,9 +70,27 @@ val networkModule: Module = module {
         )
     }
 
-    // Tables
+    // Shifts
+    factory <NotificationApi> {
+        NotificationApi(
+            basePath = baseUrl,
+            httpClient = get(),
+            json = get()
+        )
+    }
+
+    // Shifts
     factory <ShiftsApi> {
         ShiftsApi(
+            basePath = baseUrl,
+            httpClient = get(),
+            json = get()
+        )
+    }
+
+    // Tables
+    factory <TablesApi> {
+        TablesApi(
             basePath = baseUrl,
             httpClient = get(),
             json = get()

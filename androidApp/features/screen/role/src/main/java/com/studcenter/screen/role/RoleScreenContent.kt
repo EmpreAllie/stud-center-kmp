@@ -35,11 +35,13 @@ fun RoleScreenContent(
 
     val styledText = buildAnnotatedString {
         words.forEachIndexed { index, word ->
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                append(word.first().uppercase())
-            }
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
-                append(word.substring(1))
+            if (word.isNotEmpty()) {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(word.first().uppercase())
+                }
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
+                    append(word.substring(1))
+                }
             }
             if (index < words.size - 1) append("\n")
         }
@@ -55,7 +57,7 @@ fun RoleScreenContent(
     ) {
         Text(
             modifier = Modifier
-                .padding(bottom = 32.dp),
+                .padding(top = 24.dp, bottom = 32.dp),
             text = styledText,
             style = B.typography().main.bigText,
             color = B.colors().white

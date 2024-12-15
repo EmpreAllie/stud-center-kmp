@@ -11,7 +11,8 @@ val menuModule: Module = module {
         configParams = get(),
         tablesApi = get(),
         queueApi = get(),
-        shiftsApi = get()
+        shiftsApi = get(),
+        notificationApi = get()
     ) }
     factory { MenuViewModel(repository = get()) }
 }

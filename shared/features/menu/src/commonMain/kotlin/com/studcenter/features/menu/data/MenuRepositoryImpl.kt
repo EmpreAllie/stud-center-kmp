@@ -1,11 +1,13 @@
 package com.studcenter.features.menu.data
 
 import com.studcenter.data.model.ConfigParams
+import com.studcenter.data.utils.Log
 import com.studcenter.data.utils.localize
 import com.studcenter.features.menu.domain.MenuRepository
 import com.studcenter.features.menu.domain.model.TableItem
 import com.studcenter.features.menu.domain.model.WorkInfo
 import com.studcenter.resources.MultiplatformResource
+import dev.icerock.moko.network.generated.apis.NotificationApi
 import dev.icerock.moko.network.generated.apis.QueueApi
 import dev.icerock.moko.network.generated.apis.ShiftsApi
 import dev.icerock.moko.network.generated.apis.TablesApi
@@ -15,7 +17,8 @@ class MenuRepositoryImpl(
     private val configParams: ConfigParams,
     private val tablesApi: TablesApi,
     private val queueApi: QueueApi,
-    private val shiftsApi: ShiftsApi
+    private val shiftsApi: ShiftsApi,
+    private val notificationApi: NotificationApi
 ): MenuRepository {
     private var tableId: Int? = null
 
@@ -46,7 +49,9 @@ class MenuRepositoryImpl(
     }
 
     override suspend fun nextQueue(): Boolean {
-        TODO("Not yet implemented")
+        val queue = tablesApi.apiV1EmployeeQueueNextPost()
+
+        return true
     }
 
     override suspend fun getTables(): List<TableItem> {
@@ -58,7 +63,7 @@ class MenuRepositoryImpl(
                 TableItem(
                     id = it.tableId ?: 0,
                     numberElement = index + 1,
-                    employeeFormatted = it.employeeFormatted?.value ?: MultiplatformResource.strings.employee.localize()
+                    employeeFormatted = it.employeeFormatted?.value
                 )
             )
         }
@@ -84,10 +89,15 @@ class MenuRepositoryImpl(
     override suspend fun exitAccount(): Boolean {
         val keyValueStorage = configParams.keyValueStorage
 
-        keyValueStorage.accessToken = null
-        keyValueStorage.refreshToken = null
+        val response = notificationApi.apiV1NotificationFcmTokenDelete()
 
-        return true
+        return if (response.success == true) {
+            keyValueStorage.accessToken = null
+            keyValueStorage.refreshToken = null
+            true
+        } else {
+            false
+        }
     }
 
     private suspend fun getCurrentCoupon(): Int? {

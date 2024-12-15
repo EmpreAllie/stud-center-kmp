@@ -78,7 +78,7 @@ fun AuthorizationScreenContent(
 
         InputTextField(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp),
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             text = login,
             singleLine = true,
             onTextChange = { value ->
@@ -92,7 +92,7 @@ fun AuthorizationScreenContent(
 
         InputTextField(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                .padding(start = 16.dp, end = 16.dp, bottom = 24.dp),
             text = password,
             singleLine = true,
             onTextChange = { value ->

@@ -13,6 +13,7 @@ object Constants {
 
         val passNumberNull = 401
         val maxLenghtField = 16
+        val notification = SECOND * 10
     }
 
     object Strings {
@@ -20,6 +21,11 @@ object Constants {
 
         object SYSTEM {
             val mailSupport: String = "studcenter@voenmeh.ru"
+        }
+
+        object NOTIFICATION {
+            val idChannel = "0"
+            val nameChannel = "StudyCenter"
         }
     }
 

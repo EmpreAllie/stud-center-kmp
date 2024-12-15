@@ -59,4 +59,7 @@
 	<string name="exitAccount_Description">Вы уверены, что хотите выйти из аккаунта?</string>
 	<string name="nextQueue">Переход к следующему номеру</string>
 	<string name="nextQueue_Description">Закрыть текущий талон, перейти к следующему?</string>
+	<string name="notificationDisabled">Для работы приложения необходимо включить показ уведомлений</string>
+	<string name="notificationTitle">Студенческая очередь</string>
+	<string name="notificationDescription">Записал новый человек</string>
 </resources>

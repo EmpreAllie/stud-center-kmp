@@ -38,6 +38,7 @@ val sharedModules = listOf(
     projects.shared.features.root,
     projects.shared.features.base,
     projects.shared.entity,
+    projects.shared.resources,
     projects.shared,
 )
 
@@ -58,4 +59,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.koinCore)
     implementation(libs.koinAndroid)
+    implementation(libs.google.firebase.messaging)
 }

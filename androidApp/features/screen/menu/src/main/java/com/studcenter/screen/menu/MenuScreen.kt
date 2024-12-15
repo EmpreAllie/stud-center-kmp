@@ -44,6 +44,7 @@ fun MenuScreen() {
     val viewModel: MenuViewModel = remember { getKoin().get() }
     val rootViewModel: RootViewModel = remember { getKoin().get() }
 
+    val newScreen by viewModel.newScreen.state.collectAsState()
     val stateScreen by viewModel.stateScreen.state.collectAsState()
     val errorText by viewModel.errorText.state.collectAsState()
     val isWork by viewModel.isWork.state.collectAsState()
@@ -55,6 +56,16 @@ fun MenuScreen() {
     var isNext by remember { mutableStateOf(false) }
 
     val drawerState: DrawerState by remember { mutableStateOf(DrawerState(initialValue = DrawerValue.Closed)) }
+
+    LaunchedEffect(newScreen) {
+        if (newScreen != null) {
+            rootViewModel.updateScreen(
+                screen = newScreen!!,
+                argumentsJson = emptyList(),
+                isClear = true
+            )
+        }
+    }
 
     MainTheme {
         ModalNavigationDrawer(

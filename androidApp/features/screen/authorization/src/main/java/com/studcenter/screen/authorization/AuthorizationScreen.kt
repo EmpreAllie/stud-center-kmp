@@ -12,8 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import com.google.firebase.messaging.FirebaseMessaging
 import com.studcenter.base.features.enum.Screen
 import com.studcenter.base.features.enum.StateScreen
+import com.studcenter.data.utils.Log
 import com.studcenter.data.utils.localize
 import com.studcenter.domain.constants.Constants
 import com.studcenter.features.authorization.presentation.AuthorizationViewModel
@@ -35,14 +37,30 @@ fun AuthorizationScreen() {
     val stateScreen by viewModel.stateScreen.state.collectAsState()
     val errorText by viewModel.errorText.state.collectAsState()
     val isSuccessAuthorize by viewModel.isSuccessAuthorize.state.collectAsState()
+    val newScreen by viewModel.newScreen.state.collectAsState()
 
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     LaunchedEffect(isSuccessAuthorize) {
         if (isSuccessAuthorize) {
+            FirebaseMessaging.getInstance().token
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val token = task.result
+                        Log("FCM", "FCM Token: $token")
+                        viewModel.connectFirebase(token = token)
+                    } else {
+                        task.exception?.printStackTrace()
+                    }
+                }
+        }
+    }
+
+    LaunchedEffect(newScreen) {
+        if (newScreen != null) {
             rootViewModel.updateScreen(
-                screen = Screen.MENU,
+                screen = newScreen!!,
                 argumentsJson = emptyList(),
                 isClear = true
             )

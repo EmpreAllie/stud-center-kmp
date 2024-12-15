@@ -45,7 +45,7 @@
 	<string name="supportService">Служба поддержки</string>
 	<string name="tableFree">Стол свободен</string>
 	<string name="tableSelect">Выбор стола</string>
-	<string name="tableAssign">Занять стол под номером</string>
+	<string name="tableAssign">Занять стол под номером %s</string>
 	<string name="shiftsClose">Стол не выбран</string>
 	<string name="shiftsOpen">Стол №%s</string>
 	<string name="inQueue">В очереди: %s</string>
@@ -59,4 +59,7 @@
 	<string name="exitAccount_Description">Вы уверены, что хотите выйти из аккаунта?</string>
 	<string name="nextQueue">Переход к следующему номеру</string>
 	<string name="nextQueue_Description">Закрыть текущий талон, перейти к следующему?</string>
+	<string name="notificationDisabled">Для работы приложения необходимо включить показ уведомлений</string>
+	<string name="notificationTitle">Студенческая очередь</string>
+	<string name="notificationDescription">Записал новый человек</string>
 </resources>

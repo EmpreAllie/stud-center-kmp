@@ -9,11 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.FirebaseApp
 import com.studcenter.base.features.enum.Screen
 import com.studcenter.data.utils.Log
+import com.studcenter.data.utils.globalApplicationContext
 import com.studcenter.entity.enums.ErrorType
 import com.studcenter.root.di.startKoin
 import com.studcenter.root.presentation.RootViewModel
@@ -38,6 +41,8 @@ class RootScreenApplication: Application() {
             androidLogger(level = Level.DEBUG)
         }
 
+        FirebaseApp.initializeApp(this)
+
     }
 }
 
@@ -50,6 +55,7 @@ class RootActivity : ComponentActivity() {
         viewModel = getKoin().get()
 
         setContent {
+            globalApplicationContext = LocalContext.current
             RootApp(viewModel)
         }
     }

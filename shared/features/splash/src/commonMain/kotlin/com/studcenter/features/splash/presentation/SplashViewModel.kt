@@ -4,8 +4,10 @@ import com.studcenter.base.features.StateFlow
 import com.studcenter.base.features.ViewModel
 import com.studcenter.base.features.enum.Screen
 import com.studcenter.data.model.ConfigParams
+import com.studcenter.data.utils.localize
 import com.studcenter.domain.constants.Constants
 import com.studcenter.features.splash.domain.SplashRepository
+import com.studcenter.resources.MultiplatformResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.delay
@@ -15,21 +17,29 @@ import kotlinx.coroutines.withContext
 
 class SplashViewModel(private val splashRepository: SplashRepository): ViewModel() {
     val newScreen: StateFlow<Screen?> = StateFlow(null)
-
-    init {
-        update()
-    }
+    val errorText: StateFlow<String?> = StateFlow(null)
 
     public fun update() {
         viewModelScope.launch {
-            val isAuthorized = withContext(Dispatchers.IO) {
-                delay(Constants.Numbers.delaySplash)
-                splashRepository.isAuthorized()
+            try {
+                val isAuthorized = withContext(Dispatchers.IO) {
+                    delay(Constants.Numbers.delaySplash)
+                    splashRepository.isAuthorized()
+                }
+
+
+                val screen = if (isAuthorized) Screen.MENU else Screen.ROLE
+
+                newScreen.update(value = screen)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+
+                errorText.update(MultiplatformResource.strings.errorDescription_Template.localize())
             }
-
-            val screen = if (isAuthorized) Screen.MENU else Screen.ROLE
-
-            newScreen.update(value = screen)
         }
+    }
+
+    public fun clearErrorText() {
+        errorText.update(null)
     }
 }

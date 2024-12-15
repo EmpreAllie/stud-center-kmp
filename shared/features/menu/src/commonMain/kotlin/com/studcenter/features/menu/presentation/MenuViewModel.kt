@@ -28,7 +28,7 @@ class MenuViewModel(private val repository: MenuRepository): ViewModel() {
     val isWork: StateFlow<Boolean> = StateFlow(false)
     val workInfo: StateFlow<WorkInfo?> = StateFlow(null)
     val tableItems: StateFlow<List<TableItem>> = StateFlow(emptyList())
-    val tableFormatted: StateFlow<String> = StateFlow(MultiplatformResource.strings.shiftsClose.toString())
+    val tableFormatted: StateFlow<String> = StateFlow(MultiplatformResource.strings.shiftsClose.localize())
     val tableId: StateFlow<Int> = StateFlow(0)
 
     private var job: Job = Job()

@@ -2,6 +2,7 @@ package com.studcenter.features.authorization.presentation
 
 import com.studcenter.base.features.StateFlow
 import com.studcenter.base.features.ViewModel
+import com.studcenter.base.features.enum.Screen
 import com.studcenter.base.features.enum.StateScreen
 import com.studcenter.data.model.CustomResponseException
 import com.studcenter.data.utils.localize
@@ -20,6 +21,7 @@ class AuthorizationViewModel(private val repository: AuthorizationRepository): V
     val passwordError: StateFlow<String?> = StateFlow(null)
 
     val isSuccessAuthorize: StateFlow<Boolean> = StateFlow(false)
+    val newScreen: StateFlow<Screen?> = StateFlow(null)
 
     public fun login(login: String, password: String) {
         viewModelScope.launch {
@@ -62,7 +64,19 @@ class AuthorizationViewModel(private val repository: AuthorizationRepository): V
             }
         }
     }
-
+    public fun connectFirebase(token: String) {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    repository.fcmConnect(token)
+                }
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+            
+            newScreen.update(Screen.MENU)
+        }
+    }
     public fun clearErrorText() {
         errorText.update(value = null)
         loginError.update(value = null)

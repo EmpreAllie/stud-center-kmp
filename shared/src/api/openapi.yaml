@@ -113,6 +113,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ShiftStatusResponse'
+              example:
+                tableId: null
         "400":
           description: Ошибка
           content:
@@ -165,6 +167,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/notification/fcm-token:
+    post:
+      summary: Обновить FCM-токен пользователя
+      security:
+        - Authorization: []
+      tags:
+        - Notification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFcmTokenRequest'
+      responses:
+        "200":
+          description: Токен успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FcmTokenResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Удалить FCM-токен пользователя
+      security:
+        - Authorization: []
+      tags:
+        - Notification
+      responses:
+        "200":
+          description: Токен успешно удален
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FcmTokenResponse'
+        "400":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /api/v1/employee/tables:
     get:
       summary: Получить информацию о столах
@@ -181,6 +229,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TableInfo'
+              example:
+                - tableId: 1
+                  employeeFormatted: "Иванов И. И."
+                - tableId: 2
+                  employeeFormatted: "Смирнов С. С."
+                - tableId: 3
+                  employeeFormatted: null
         "400":
           description: Ошибка
           content:
@@ -300,6 +355,18 @@ components:
       scheme: bearer
       type: http
   schemas:
+    UpdateFcmTokenRequest:
+      type: object
+      properties:
+        fcmToken:
+          type: string
+      required:
+        - fcmToken
+    FcmTokenResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
     EmployeeLoginRequest:
       type: object
       properties:

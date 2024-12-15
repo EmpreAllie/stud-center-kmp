@@ -9,7 +9,8 @@ import org.koin.dsl.module
 val authorizationModule: Module = module {
     factory <AuthorizationRepository> { AuthorizationRepositoryImpl(
         configParams = get(),
-        authenticationApi = get()
+        authenticationApi = get(),
+        notificationApi = get()
     ) }
     factory {
         AuthorizationViewModel(
