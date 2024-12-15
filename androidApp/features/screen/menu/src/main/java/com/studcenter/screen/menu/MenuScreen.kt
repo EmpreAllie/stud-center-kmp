@@ -47,6 +47,7 @@ fun MenuScreen() {
     val stateScreen by viewModel.stateScreen.state.collectAsState()
     val errorText by viewModel.errorText.state.collectAsState()
     val isWork by viewModel.isWork.state.collectAsState()
+    val tableId by viewModel.tableId.state.collectAsState()
 
     var isCloseShift by remember { mutableStateOf(false) }
     var isExitAccount by remember { mutableStateOf(false) }
@@ -170,7 +171,7 @@ fun MenuScreen() {
         if (isOpenTable) {
             MainDialog(
                 title = MultiplatformResource.strings.tableSelect.localize(),
-                description = MultiplatformResource.strings.tableAssign.format("${viewModel.getTableId()}"),
+                description = MultiplatformResource.strings.tableAssign.format("$tableId"),
                 confirmText = MultiplatformResource.strings.accept.localize(),
                 confirmAction = {
                     isOpenTable = false

@@ -7,6 +7,11 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val menuModule: Module = module {
-    factory <MenuRepository> { MenuRepositoryImpl() }
+    factory <MenuRepository> { MenuRepositoryImpl(
+        configParams = get(),
+        tablesApi = get(),
+        queueApi = get(),
+        shiftsApi = get()
+    ) }
     factory { MenuViewModel(repository = get()) }
 }

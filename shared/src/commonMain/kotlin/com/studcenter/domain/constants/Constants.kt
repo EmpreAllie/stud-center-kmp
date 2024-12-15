@@ -9,6 +9,7 @@ object Constants {
 
         val delaySplash = SECOND * 2
         val displayUpdateMs = SECOND * 5
+        val menuUpdateMs = SECOND * 10
 
         val passNumberNull = 401
         val maxLenghtField = 16
