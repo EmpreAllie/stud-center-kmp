@@ -6,7 +6,7 @@
     <color name="green">#22FF00</color>
     <color name="freeTable">#8BFFA6</color>
     <color name="fullTable">#FF9595</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="black">#FF000000</color>
-    <color name="gray">#FFD9D9D9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#D9D9D9</color>
 </resources>

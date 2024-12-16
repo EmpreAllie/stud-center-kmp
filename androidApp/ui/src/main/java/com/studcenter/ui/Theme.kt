@@ -1,7 +1,6 @@
 package com.studcenter.ui
 
 import android.content.Context
-import android.graphics.Typeface
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -25,7 +24,7 @@ fun MainTheme(
 
     CompositionLocalProvider(
         localColors(LocalContext.current) provides colors,
-        localTypography(LocalContext.current) provides Typography(mainTextFont(LocalContext.current))
+        localTypography() provides Typography(regular = regular(), bold = bold())
     ) {
         MaterialTheme(
             content = content,
@@ -33,9 +32,10 @@ fun MainTheme(
     }
 }
 
-fun mainTextFont(context: Context) = FontFamily( Font(resId = MultiplatformResource.fonts.inter.fontResourceId) )
+fun regular() = FontFamily( Font(resId = MultiplatformResource.fonts.inter.fontResourceId) )
+fun bold() = FontFamily( Font(resId = MultiplatformResource.fonts.inter_bold.fontResourceId) )
 fun localColors(context: Context) = compositionLocalOf <Colors> { Colors.Light(context) }
-fun localTypography(context: Context) = compositionLocalOf { Typography(mainTextFont(context)) }
+fun localTypography() = compositionLocalOf { Typography(regular = regular(), bold = bold()) }
 
 object B {
     @Composable
@@ -45,6 +45,6 @@ object B {
 
     @Composable
     fun typography(): Typography {
-        return localTypography(context = LocalContext.current).current
+        return localTypography().current
     }
 }

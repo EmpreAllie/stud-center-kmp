@@ -21,10 +21,9 @@ struct iOSApp: App {
                         .transition(.customSlide)
                         .animation(.easeInOut, value: UUID())
                 }
-                
-                .onChange(of: viewModel.screen) { oldState, newState in
+                .onChange(of: viewModel.screen) { newState in
                     withAnimation {
-                        handleScreenChange(oldScreen: oldState, newScreen: newState)
+                        handleScreenChange(oldScreen: nil, newScreen: newState)
                     }
                 }
                 .navigationDestination(for: iosExport.Screen.self) { screen in
