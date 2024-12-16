@@ -11,6 +11,9 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		46007B48F822739AE285282D /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0772C71EB999B514DCF58B4 /* Pods_iosApp.framework */; };
+		A0410FDD2D102196002799DF /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0410FDA2D102196002799DF /* Resource.swift */; };
+		A0410FDE2D102196002799DF /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0410FDB2D102196002799DF /* Typography.swift */; };
+		A0410FDF2D102196002799DF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0410FDC2D102196002799DF /* Colors.swift */; };
 		A0B8DA3C2CA2EE1E0064DD18 /* KotlinMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8DA2B2CA2EE1E0064DD18 /* KotlinMapping.swift */; };
 		A0B8DA3D2CA2EE1E0064DD18 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8DA2C2CA2EE1E0064DD18 /* Observer.swift */; };
 		A0B8DA3E2CA2EE1E0064DD18 /* KoinHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8DA2F2CA2EE1E0064DD18 /* KoinHelper.swift */; };
@@ -28,6 +31,9 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0410FDA2D102196002799DF /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		A0410FDB2D102196002799DF /* Typography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		A0410FDC2D102196002799DF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A0B8DA2B2CA2EE1E0064DD18 /* KotlinMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KotlinMapping.swift; sourceTree = "<group>"; };
 		A0B8DA2C2CA2EE1E0064DD18 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		A0B8DA2F2CA2EE1E0064DD18 /* KoinHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KoinHelper.swift; sourceTree = "<group>"; };
@@ -192,6 +198,9 @@
 		A0B8DA3B2CA2EE1E0064DD18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A0410FDC2D102196002799DF /* Colors.swift */,
+				A0410FDA2D102196002799DF /* Resource.swift */,
+				A0410FDB2D102196002799DF /* Typography.swift */,
 				A0B8DA3A2CA2EE1E0064DD18 /* Config */,
 			);
 			path = Resources;
@@ -321,6 +330,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0410FDE2D102196002799DF /* Typography.swift in Sources */,
+				A0410FDF2D102196002799DF /* Colors.swift in Sources */,
+				A0410FDD2D102196002799DF /* Resource.swift in Sources */,
 				A0B8DA422CA2EE1E0064DD18 /* Screen.swift in Sources */,
 				A0B8DA402CA2EE1E0064DD18 /* RootViewModelWrapper.swift in Sources */,
 				A0B8DA3E2CA2EE1E0064DD18 /* KoinHelper.swift in Sources */,
