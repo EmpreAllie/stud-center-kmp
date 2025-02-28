@@ -12,9 +12,7 @@ import androidx.compose.ui.unit.sp
 @Immutable
 data class Typography(private val regular: FontFamily, private val bold: FontFamily) {
     val text: TitleTypography = TitleTypography(regular, bold)
-    val main: MainTypography = MainTypography(regular, bold)
     val menu: MenuTypography = MenuTypography(regular, bold)
-    val navigation: NavigationTypography = NavigationTypography(regular, bold)
 }
 
 @Immutable
@@ -59,41 +57,6 @@ data class TitleTypography(
 }
 
 @Immutable
-data class MainTypography(
-    private val regular: FontFamily,
-    private val bold: FontFamily
-) {
-    val bigText: TextStyle = TextStyle(
-        fontSize = 40.sp,
-        lineHeight = 50.sp,
-        fontFamily = bold,
-        fontWeight = FontWeight.W400
-    ).preciseLineHeight()
-
-    val mediumText: TextStyle = TextStyle(
-        fontSize = 32.sp,
-        lineHeight = 26.sp,
-        fontFamily = bold,
-        fontWeight = FontWeight.W400
-    ).preciseLineHeight()
-
-    val text: TextStyle = TextStyle(
-        fontSize = 24.sp,
-        lineHeight = 22.sp,
-        fontFamily = bold,
-        fontWeight = FontWeight.W400
-    ).preciseLineHeight()
-
-    val button: TextStyle = TextStyle(
-        fontSize = 20.sp,
-        lineHeight = 22.sp,
-        fontFamily = regular,
-        fontWeight = FontWeight.W400
-    ).preciseLineHeight()
-}
-
-
-@Immutable
 data class MenuTypography(
     private val regular: FontFamily,
     private val bold: FontFamily
@@ -121,26 +84,6 @@ data class MenuTypography(
 
     val itemValue: TextStyle = TextStyle(
         fontSize = 24.sp,
-        lineHeight = 22.sp,
-        fontFamily = regular,
-        fontWeight = FontWeight.W400
-    ).preciseLineHeight()
-}
-
-@Immutable
-data class NavigationTypography(
-    private val regular: FontFamily,
-    private val bold: FontFamily
-) {
-    val title: TextStyle = TextStyle(
-        fontSize = 28.sp,
-        lineHeight = 22.sp,
-        fontFamily = bold,
-        fontWeight = FontWeight.W400
-    ).preciseLineHeight()
-
-    val button: TextStyle = TextStyle(
-        fontSize = 20.sp,
         lineHeight = 22.sp,
         fontFamily = regular,
         fontWeight = FontWeight.W400

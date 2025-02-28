@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.googleService)
 }
 
 android {
@@ -60,7 +59,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activityXml)
     implementation(libs.activityCompose)
-    implementation(platform(libs.google.firebase.bom))
 
     debugImplementation(libs.compose.ui.tooling)
 }

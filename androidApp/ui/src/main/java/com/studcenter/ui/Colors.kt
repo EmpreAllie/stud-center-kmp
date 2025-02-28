@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.compose.ui.graphics.Color
 import com.studcenter.resources.MultiplatformResource
 
+/**
+ * Colors - цветовая палитра приложения (для светлой и темной темы)
+ */
 sealed class Colors {
     abstract val primary: Color
     abstract val secondary: Color

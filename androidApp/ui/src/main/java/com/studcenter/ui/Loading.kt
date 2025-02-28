@@ -1,5 +1,6 @@
 package com.studcenter.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,32 +16,37 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun LoadingContent() {
-    CircularProgressIndicator(
-        modifier = Modifier.size(22.dp),
-        color = B.colors().primary,
-        trackColor = B.colors().transparent,
-        strokeWidth = 2.dp,
-        strokeCap = StrokeCap.Square
-    )
-}
-
-@Composable
-fun LoadingContentFull() {
+fun LoadingContent(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = B.colors().transparent
+) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(B.colors().black.copy(alpha = 0.8f)),
+        modifier = modifier
+            .background(backgroundColor),
         contentAlignment = Alignment.Center
     ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(22.dp),
+            color = B.colors().primary,
+            trackColor = B.colors().transparent,
+            strokeWidth = 2.dp,
+            strokeCap = StrokeCap.Square
+        )
+    }
+}
+
+@Preview(name = "Light Mode")
+@Composable
+fun LoadingContentLight_Preview() {
+    MainTheme {
         LoadingContent()
     }
 }
 
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-@Preview
-internal fun LoadingContentFull_Preview() {
+fun LoadingContentDark_Preview() {
     MainTheme {
-        LoadingContentFull()
+        LoadingContent()
     }
 }

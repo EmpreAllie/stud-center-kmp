@@ -1,5 +1,6 @@
 package com.studcenter.ui.button
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -22,14 +23,26 @@ import androidx.compose.ui.unit.dp
 import com.studcenter.resources.MultiplatformResource
 import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
-import com.studcenter.ui.R
 
+/**
+ * Кнопка без заднего фона
+ * @param modifier Настройки кнопки
+ * @param isEnabled Работает ли кнопка
+ * @param modifierIcon Настройки иконки
+ * @param iconRes Путь к ресурсы иконки
+ * @param size Размер кнопки в Dp
+ * @param backgroundColor Задний фон кнопки
+ * @param iconColor Цвет иконки
+ * @param clipDp Радиус округления кнопки
+ * @param onClick Действие при нажатии на кнопку
+ * @sample ImageButton_Preview
+ */
 @Composable
 fun ImageButton(
-    isEnabled: Boolean = true,
     modifier: Modifier = Modifier,
+    isEnabled: Boolean = true,
     modifierIcon: Modifier,
-    iconId: Int,
+    iconRes: Int,
     size: Int = 48,
     backgroundColor: Color = B.colors().transparent,
     iconColor: Color = B.colors().secondary,
@@ -44,23 +57,32 @@ fun ImageButton(
             .clickable(enabled = isEnabled) { onClick() },
         contentAlignment = Alignment.Center
     ) {
-        if (iconId != null) {
             Icon(
                 modifier = modifierIcon
                     .fillMaxSize(),
-                painter = painterResource(id = iconId),
+                painter = painterResource(id = iconRes),
                 contentDescription = null,
                 tint = iconColor
             )
-        }
     }
 }
 
+/**
+ * Кнопка без заднего фона
+ * @param modifier Настройки кнопки
+ * @param isEnabled Работает ли кнопка
+ * @param iconRes Путь к ресурсы иконки
+ * @param size Размер кнопки в Dp
+ * @param iconColor Цвет иконки
+ * @param onClick Действие при нажатии на кнопку
+ * @sample ImageButtonLight_Preview
+ */
+
 @Composable
 fun ImageButton(
-    isEnabled: Boolean = true,
     modifier: Modifier = Modifier,
-    iconId: Int,
+    isEnabled: Boolean = true,
+    iconRes: Int,
     size: Int = 48,
     iconColor: Color = B.colors().secondary,
     onClick: () -> Unit,
@@ -77,34 +99,51 @@ fun ImageButton(
             .clickable(enabled = isEnabled) { onClick() },
         contentAlignment = Alignment.Center
     ) {
-        if (iconId != null) {
-            Icon(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
-                ,
-                painter = painterResource(id = iconId),
-                contentDescription = null,
-                tint = iconColor
-            )
-        }
+        Icon(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+            ,
+            painter = painterResource(id = iconRes),
+            contentDescription = null,
+            tint = iconColor
+        )
     }
 }
 
 
+@Preview(name = "Light Mode")
 @Composable
-@Preview
-internal fun ImageButton_Preview() {
+internal fun ImageButtonLight_Preview() {
     MainTheme {
         Column {
             ImageButton(
                 modifier = Modifier.padding(bottom = 16.dp),
                 isEnabled = true, modifierIcon = Modifier
                     .padding(8.dp),
-                iconId = MultiplatformResource.images.ic_back.drawableResId
+                iconRes = MultiplatformResource.images.ic_back.drawableResId
             ) {}
 
-            ImageButton(iconId = MultiplatformResource.images.ic_menu.drawableResId) {
+            ImageButton(iconRes = MultiplatformResource.images.ic_menu.drawableResId) {
+
+            }
+        }
+    }
+}
+
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+internal fun ImageButtonDark_Preview() {
+    MainTheme {
+        Column {
+            ImageButton(
+                modifier = Modifier.padding(bottom = 16.dp),
+                isEnabled = true, modifierIcon = Modifier
+                    .padding(8.dp),
+                iconRes = MultiplatformResource.images.ic_back.drawableResId
+            ) {}
+
+            ImageButton(iconRes = MultiplatformResource.images.ic_menu.drawableResId) {
 
             }
         }

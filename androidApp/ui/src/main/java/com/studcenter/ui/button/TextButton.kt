@@ -1,5 +1,6 @@
 package com.studcenter.ui.button
 
+import android.content.res.Configuration
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -15,13 +16,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.studcenter.ui.B
 
+/**
+ * Текстовая кнопка
+ * @param modifier Настройки кнопки
+ * @param text Текст
+ * @param textStyle Стиль текста
+ * @param textColor Цвет текста
+ * @param onClick Действие при нажатии
+ * @sample TextButtonLight_Preview
+ */
+
 @Composable
 fun TextButton(
-    text: String,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    normalTextColor: Color = B.colors().primary,
+    text: String,
+    textColor: Color = B.colors().primary,
     textStyle: TextStyle = B.typography().text.buttonText,
+    onClick: () -> Unit,
 ) {
     val isPressed = remember { mutableStateOf(false) }
 
@@ -39,21 +50,32 @@ fun TextButton(
                 )
             },
         style = textStyle.copy(
-            color = if (isPressed.value) normalTextColor.copy(alpha = 0.7f) else normalTextColor
+            color = if (isPressed.value) textColor.copy(alpha = 0.7f) else textColor
         )
     )
 }
 
 
-@Preview
+@Preview(name = "Light Mode")
 @Composable
-fun TextButton_Preview() {
+fun TextButtonLight_Preview() {
     Column() {
         TextButton(
-            text = "Click Me",
             modifier = Modifier
                 .padding(bottom = 6.dp),
-            onClick = { },
-        )
+            text = "Click Me",
+        ) { }
+    }
+}
+
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun TextButtonDark_Preview() {
+    Column() {
+        TextButton(
+            modifier = Modifier
+                .padding(bottom = 6.dp),
+            text = "Click Me",
+        ) { }
     }
 }

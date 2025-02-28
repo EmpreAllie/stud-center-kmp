@@ -33,25 +33,6 @@ fun SplashScreen() {
     val newScreen by viewModel.newScreen.state.collectAsState()
     val errorText by viewModel.errorText.state.collectAsState()
 
-    val notificationPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            viewModel.update()
-        } else {
-            Toast.makeText(context, MultiplatformResource.strings.notificationDisabled.localize(), Toast.LENGTH_SHORT).show()
-            activity.finish()
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            notificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            viewModel.update()
-        }
-    }
-
     LaunchedEffect(newScreen) {
         if (newScreen != null) {
             rootViewModel.updateScreen(

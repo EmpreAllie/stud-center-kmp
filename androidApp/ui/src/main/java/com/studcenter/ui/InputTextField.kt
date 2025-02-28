@@ -1,5 +1,6 @@
 package com.studcenter.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -44,24 +45,40 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-
+/**
+ * Поле для ввода
+ * @param modifier Настройки поля для ввода
+ * @param text Отображаемый текст
+ * @param hintText Скрытый текст
+ * @param errorText Текст ошибки
+ * @param isError Отобразить ошибку
+ * @param isEnabled Работает ли текстовое поле
+ * @param isSingleLine Однострочный текст
+ * @param height Высота текстового поля
+ * @param textSelection Выделение текста (в основном не нужно)
+ * @param keyboardType Тип клавиатуры (отобразить только цифры, все символы и т.д.)
+ * @param maxLength Максимальное количество символов
+ * @param maxLines Максимальное количество строк
+ * @param trailingIcon Иконка справа от текстового поля
+ * @param onTextChange Действие при нажатии
+ * @sample InputTextFieldDark_Preview
+ */
 @Composable
 fun InputTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hintText: String,
-    onTextChange: (String) -> Unit = {},
-    singleLine: Boolean = false,
+    errorText: String? = null,
+    isError: Boolean = !errorText.isNullOrBlank(),
+    isEnabled: Boolean = true,
+    isSingleLine: Boolean = false,
     height: Dp = 56.dp,
     textSelection: Int = 0,
-    errorText: String? = null,
-    isError: Boolean = false,
-    isEnabled: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     maxLength: Int = Int.MAX_VALUE,
     maxLines: Int = Int.MAX_VALUE,
-    icon: Int? = null,
-    onClickIcon: () -> Unit = {},
+    trailingIcon: (@Composable () -> Unit)? = null,
+    onTextChange: (String) -> Unit = {},
 ) {
     val focusManager = LocalFocusManager.current
     val isFocused: MutableState<Boolean> = remember { mutableStateOf(false) }
@@ -131,7 +148,7 @@ fun InputTextField(
                                 top = 0.dp,
                                 start = 0.dp,
                                 bottom = 0.dp,
-                                end = if (icon != null) 16.dp else 8.dp
+                                end = if (trailingIcon != null) 16.dp else 8.dp
                             )
                             .onFocusChanged {
                                 if (!isEnabled) {
@@ -142,7 +159,7 @@ fun InputTextField(
                         enabled = isEnabled,
                         value = textFieldValue,
                         maxLines = maxLines,
-                        singleLine = singleLine,
+                        singleLine = isSingleLine,
                         keyboardOptions = KeyboardOptions(keyboardType = keyboardType,),
                         keyboardActions = KeyboardActions(onNext = {
                             focusManager.moveFocus(FocusDirection.Down)
@@ -166,18 +183,7 @@ fun InputTextField(
                     )
                 }
 
-            if (icon != null) {
-                Icon(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable {
-                            onClickIcon()
-                        },
-                    painter = painterResource(id = icon),
-                    contentDescription = null,
-                    tint = B.colors().secondary,
-                )
-            }
+            trailingIcon?.invoke()
         }
     }
 
@@ -188,7 +194,7 @@ fun InputTextField(
                 start = 20.dp,
                 end = 20.dp,
             ),
-            text = errorText ?: "",
+            text = errorText,
             overflow = TextOverflow.Ellipsis,
             color = B.colors().error,
             style = B.typography().text.inputText,
@@ -198,9 +204,9 @@ fun InputTextField(
 }
 
 
-@Preview(name = "Light Mode", backgroundColor = 0xFFFFFFFF, showBackground = true)
+@Preview(name = "Light Mode")
 @Composable
-internal fun TextFieldPreview() {
+internal fun InputTextFieldLight_Preview() {
     MainTheme {
         Column(modifier = Modifier
             .background(B.colors().primary)) {
@@ -208,10 +214,41 @@ internal fun TextFieldPreview() {
                 modifier = Modifier.
                 padding(bottom = 16.dp),
                 hintText = "Пароль",
-                isEnabled = true,
+                isSingleLine = true,
+                errorText = "",
                 isError = false,
-                singleLine = true,
-                errorText = "")
+                isEnabled = true
+            )
+        }
+    }
+}
+
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+internal fun InputTextFieldDark_Preview() {
+    MainTheme {
+        Column(modifier = Modifier
+            .background(B.colors().primary)) {
+            InputTextField(
+                modifier = Modifier.
+                padding(bottom = 16.dp),
+                hintText = "Пароль",
+                isSingleLine = true,
+                errorText = "",
+                isError = false,
+                isEnabled = true,
+                trailingIcon = {
+                    Icon(
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {
+
+                            },
+                        painter = painterResource(id = R.drawable.ic_cross),
+                        contentDescription = null
+                    )
+                }
+            )
         }
     }
 }

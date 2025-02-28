@@ -19,16 +19,18 @@ class SplashViewModel(private val splashRepository: SplashRepository): ViewModel
     val newScreen: StateFlow<Screen?> = StateFlow(null)
     val errorText: StateFlow<String?> = StateFlow(null)
 
-    public fun update() {
+    init {
+        update()
+    }
+
+    private fun update() {
         viewModelScope.launch {
             try {
                 val isAuthorized = withContext(Dispatchers.IO) {
-                    delay(Constants.Numbers.delaySplash)
                     splashRepository.isAuthorized()
                 }
 
-
-                val screen = if (isAuthorized) Screen.MENU else Screen.ROLE
+                val screen = Screen.AUTHORIZATION // TODO: if (isAuthorized) Screen.MENU else Screen.AUTHORIZATION
 
                 newScreen.update(value = screen)
             } catch (e: Throwable) {

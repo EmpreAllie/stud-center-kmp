@@ -1,5 +1,6 @@
 package com.studcenter.ui.dialog
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.studcenter.data.utils.format
 import com.studcenter.data.utils.globalApplicationContext
 import com.studcenter.data.utils.localize
 import com.studcenter.resources.MultiplatformResource
@@ -34,6 +34,15 @@ import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
 import com.studcenter.ui.button.MainButton
 
+/**
+ * Диалоговое окно при появлении ошибки
+ * @param title Главный текст
+ * @param description Описание ошибки
+ * @param confirmText Текст кнопки подтверждения
+ * @param confirmAction Действие при подтверждении
+ * @param cancelAction Действие при закрытии
+ * @sample MainDialogConfirmLight_Preview
+ */
 @Composable
 fun MainDialog(
     title: String,
@@ -102,14 +111,14 @@ fun MainDialog(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     MainButton(
-                        modifier = Modifier,
-                        text = confirmText,
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         contentColor = B.colors().secondary,
                         contentPadding = PaddingValues(horizontal = 20.dp),
+                        text = confirmText,
+                        textStyle = B.typography().text.main,
                         backgroundColor = B.colors().white,
                         cornerShapeSize = 100.dp,
-                        isFillWidth = false,
-                        textStyle = B.typography().text.main,
                         onClick = confirmAction
                     )
                 }
@@ -119,9 +128,30 @@ fun MainDialog(
     }
 }
 
+@Preview(name = "Light Mode")
 @Composable
-@Preview
-internal fun MainDialogConfirm_Preview() {
+internal fun MainDialogConfirmLight_Preview() {
+    globalApplicationContext = LocalContext.current
+    MainTheme {
+        Box(
+            modifier = Modifier
+                .background(B.colors().white.copy(alpha = 0.3f))
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center,
+        ) {
+            MainDialog(
+                title = MultiplatformResource.strings.tableSelect.localize(),
+                description = MultiplatformResource.strings.tableAssign.localize(),
+                confirmText = MultiplatformResource.strings.accept.localize(),
+                confirmAction = { /*TODO*/ },
+                cancelAction = { /* TODO */})
+        }
+    }
+}
+
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+internal fun MainDialogConfirmDark_Preview() {
     globalApplicationContext = LocalContext.current
     MainTheme {
         Box(

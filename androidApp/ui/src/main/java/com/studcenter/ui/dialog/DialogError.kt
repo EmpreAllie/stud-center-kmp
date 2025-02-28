@@ -1,5 +1,6 @@
 package com.studcenter.ui.dialog
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -26,6 +31,13 @@ import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
 import com.studcenter.ui.button.TextButton
 
+/**
+ * Диалоговое окно при появлении ошибки
+ * @param title Главный текст
+ * @param description Описание ошибки
+ * @param onClose Действие при закрытии
+ * @sample DialogErrorLight_Preview
+ */
 @Composable
 fun DialogError(
     title: String,
@@ -76,7 +88,7 @@ fun DialogError(
                     ) {
                         TextButton(
                             text = MultiplatformResource.strings.close.localize(),
-                            normalTextColor = B.colors().primary,
+                            textColor = B.colors().primary,
                             onClick = onClose
                         )
                     }
@@ -88,19 +100,37 @@ fun DialogError(
     }
 }
 
-
-@Preview
+@Preview(name = "Light Mode")
 @Composable
-internal fun DialogError_Preview() {
+internal fun DialogErrorLight_Preview() {
     globalApplicationContext = LocalContext.current
-    
+
+    var error: String? by remember { mutableStateOf("Описание в две строки, Описание в две строки") }
     MainTheme {
         Box(modifier = Modifier.background(B.colors().white)) {
             DialogError(
                 title = MultiplatformResource.strings.errorTitle.localize(),
-                description = "Описание в две строки, Описание в две строки"
+                description = error.orEmpty()
             ) {
+                error = null
+            }
+        }
+    }
+}
 
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+internal fun DialogErrorDark_Preview() {
+    globalApplicationContext = LocalContext.current
+
+    var error: String? by remember { mutableStateOf("Описание в две строки, Описание в две строки") }
+    MainTheme {
+        Box(modifier = Modifier.background(B.colors().white)) {
+            DialogError(
+                title = MultiplatformResource.strings.errorTitle.localize(),
+                description = error.orEmpty()
+            ) {
+                error = null
             }
         }
     }

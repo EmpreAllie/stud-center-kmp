@@ -13,14 +13,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <service
-            android:name="com.studcenter.root.StudyFirebaseMessagingService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <activity
             android:name="com.studcenter.root.RootActivity"
             android:exported="true">
