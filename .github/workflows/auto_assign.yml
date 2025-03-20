@@ -1,0 +1,38 @@
+name: Auto Assign & Reviewers
+
+on: pull_request
+
+permissions:
+  pull-requests: write 
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            const prAuthor = context.actor;  
+            const reviewers = ["RskullW", "yageorgiy"]; 
+            
+            console.log("Автор PR (context.actor):", prAuthor);
+            console.log("Исходные ревьюеры:", reviewers);
+
+            const filteredReviewers = reviewers.filter(user => user !== prAuthor);
+
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              assignees: [prAuthor]
+            });
+
+            if (filteredReviewers.length > 0) {
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                reviewers: filteredReviewers
+              });
+            } 
