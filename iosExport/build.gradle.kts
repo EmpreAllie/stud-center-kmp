@@ -14,6 +14,8 @@ val features = listOf(
     projects.shared.features.splash,
     projects.shared.features.root,
     projects.shared.features.base,
+    projects.shared.features.authorization,
+
 )
 
 val apiLibs = listOf(

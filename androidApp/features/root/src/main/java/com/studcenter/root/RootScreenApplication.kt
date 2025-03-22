@@ -95,7 +95,7 @@ fun RootApp(viewModel: RootViewModel) {
         }
 
         composable(Screen.AUTHORIZATION.toString()) {
-            // TODO("Переход к другому экрану")
+            AuthorizationScreen()
             BackHandler(true) {}
         }
     }

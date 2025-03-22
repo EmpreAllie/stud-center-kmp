@@ -1,45 +1,42 @@
-package com.studcenter.screen.splash
+package com.studcenter.screen.authorization
 
-import androidx.compose.foundation.Image
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
-import com.studcenter.ui.R as A
 
 @Composable
-fun SplashScreenContent() {
+fun AuthorizationScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(B.colors().white)
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(B.colors().white),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Image(
-            modifier = Modifier
-                .scale(1.5f),
-            painter = painterResource(id = A.drawable.logo_app),
-            contentDescription = "StudyCenter",
+        Text(
+            text = "Widmeyer Template",
+            style = B.typography().text.title,
+            color = B.colors().secondary
         )
     }
 }
 
 @Composable
-@Preview
-internal fun SplashScreenContent_Preview() {
+@Preview(name = "Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+internal fun AuthorizationScreenContent_Preview() {
     MainTheme {
-        SplashScreenContent()
+        AuthorizationScreenContent()
     }
 }
