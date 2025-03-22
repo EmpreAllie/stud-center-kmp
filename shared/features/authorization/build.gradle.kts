@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -12,13 +11,14 @@ kotlin {
             }
         }
     }
+    
     listOf(
-    iosX64(),
-    iosArm64(),
-    iosSimulatorArm64(),
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "root"
+            baseName = "screen"
             isStatic = true
         }
     }
@@ -29,8 +29,6 @@ kotlin {
             implementation(projects.shared.entity)
             implementation(projects.shared.resources)
             implementation(projects.shared.features.base)
-            implementation(projects.shared.features.splash)
-            implementation(projects.shared.features.authorization)
             implementation(libs.mokoMvvmCore)
             implementation(libs.mokoMvvmFlow)
             implementation(libs.mokoMvvmLiveData)
@@ -38,25 +36,18 @@ kotlin {
             implementation(libs.ktorClientJson)
             implementation(libs.ktorClientCio)
             implementation(libs.koinCore)
-            implementation(libs.multiplatformSettings)
+            implementation(libs.mokoNetwork)
+            implementation(libs.mokoNetworkErrors)
+            implementation(libs.mokoNetworkEngine)
         }
-
-        androidMain.dependencies {
-            implementation(libs.koinCore)
-            implementation(libs.koinAndroid)
-            implementation(libs.multiplatformSettings)
-            implementation(libs.gmsPlayServiceLocation)
-        }
-
-        iosMain.dependencies {
-            implementation(libs.koinCore)
-            implementation(libs.multiplatformSettings)
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
 
 android {
-    namespace = "com.studcenter.features.root"
+    namespace = "com.studcenter.features.authorization"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
