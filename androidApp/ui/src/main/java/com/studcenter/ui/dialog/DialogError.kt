@@ -109,7 +109,7 @@ internal fun DialogErrorLight_Preview() {
     MainTheme {
         Box(modifier = Modifier.background(B.colors().white)) {
             DialogError(
-                title = MultiplatformResource.strings.errorTitle.localize(),
+                title = "",//MultiplatformResource.strings.errorTitle.localize(),
                 description = error.orEmpty()
             ) {
                 error = null
@@ -127,7 +127,7 @@ internal fun DialogErrorDark_Preview() {
     MainTheme {
         Box(modifier = Modifier.background(B.colors().white)) {
             DialogError(
-                title = MultiplatformResource.strings.errorTitle.localize(),
+                title ="",// MultiplatformResource.strings.errorTitle.localize(),
                 description = error.orEmpty()
             ) {
                 error = null

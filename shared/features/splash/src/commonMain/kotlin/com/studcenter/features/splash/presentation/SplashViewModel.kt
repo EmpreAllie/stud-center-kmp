@@ -41,6 +41,19 @@ class SplashViewModel(private val splashRepository: SplashRepository): ViewModel
         }
     }
 
+    private suspend fun checkVersion() {
+        val isActual = splashRepository.isActualVersionApp()
+
+        if (isActual) {
+            checkAuthorized()
+        } else {
+            errorText.update(MultiplatformResource.strings.versionOld.localize())
+        }
+    }
+
+    private suspend fun checkAuthorized() {
+
+    }
     public fun clearErrorText() {
         errorText.update(null)
     }
