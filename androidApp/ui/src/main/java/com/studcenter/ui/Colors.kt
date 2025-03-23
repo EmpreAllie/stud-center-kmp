@@ -13,6 +13,7 @@ sealed class Colors {
     abstract val error: Color
     abstract val green: Color
     abstract val freeTable: Color
+    abstract val pendingTable: Color
     abstract val fullTable: Color
     abstract val white: Color
     abstract val black: Color
@@ -30,6 +31,7 @@ sealed class Colors {
         override val green: Color = Color(MultiplatformResource.colors.green.getColor(context)),
         override val gray: Color = Color(MultiplatformResource.colors.gray.getColor(context)),
         override val freeTable: Color = Color(MultiplatformResource.colors.freeTable.getColor(context)),
+        override val pendingTable: Color = Color(MultiplatformResource.colors.pendingTable.getColor(context)),
         override val fullTable: Color = Color(MultiplatformResource.colors.fullTable.getColor(context)),
     ): Colors()
 
@@ -44,6 +46,7 @@ sealed class Colors {
         override val green: Color = Color(MultiplatformResource.colors.green.getColor(context)),
         override val gray: Color = Color(MultiplatformResource.colors.gray.getColor(context)),
         override val freeTable: Color = Color(MultiplatformResource.colors.freeTable.getColor(context)),
+        override val pendingTable: Color = Color(MultiplatformResource.colors.pendingTable.getColor(context)),
         override val fullTable: Color = Color(MultiplatformResource.colors.fullTable.getColor(context)),
     ): Colors()
 }

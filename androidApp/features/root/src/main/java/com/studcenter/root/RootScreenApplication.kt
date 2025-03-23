@@ -21,6 +21,7 @@ import com.studcenter.entity.enums.ErrorType
 import com.studcenter.root.di.startKoin
 import com.studcenter.root.presentation.RootViewModel
 import com.studcenter.screen.splash.SplashScreen
+import com.studcenter.screen.authorization.AuthorizationScreen
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

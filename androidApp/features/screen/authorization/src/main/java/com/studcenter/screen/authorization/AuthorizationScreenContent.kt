@@ -12,6 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.studcenter.data.utils.localize
+import com.studcenter.resources.MultiplatformResource
 import com.studcenter.ui.B
 import com.studcenter.ui.MainTheme
 
@@ -26,9 +28,9 @@ fun AuthorizationScreenContent() {
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = "Widmeyer Template",
+            text = MultiplatformResource.strings.authorization.localize(),
             style = B.typography().text.title,
-            color = B.colors().secondary
+            color = B.colors().primary
         )
     }
 }
