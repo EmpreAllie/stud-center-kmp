@@ -21,7 +21,7 @@ data class TitleTypography(
     private val bold: FontFamily
 ) {
     val title: TextStyle = TextStyle(
-        fontSize = 22.sp,
+        fontSize = 32.sp,
         lineHeight = 28.sp,
         fontFamily = bold,
         fontWeight = FontWeight.W400
@@ -43,7 +43,7 @@ data class TitleTypography(
 
     val inputText: TextStyle = TextStyle(
         fontSize = 16.sp,
-        lineHeight = 28.sp,
+        lineHeight = 25.sp,
         fontFamily = regular,
         fontWeight = FontWeight.W400
     ).preciseLineHeight()

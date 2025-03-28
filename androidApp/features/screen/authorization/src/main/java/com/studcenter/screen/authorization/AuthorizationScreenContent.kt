@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.studcenter.data.utils.localize
 import com.studcenter.resources.MultiplatformResource
 import com.studcenter.ui.B
+import com.studcenter.ui.InputTextField
 import com.studcenter.ui.MainTheme
 
 @Composable
@@ -22,7 +23,7 @@ fun AuthorizationScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(4.dp)
             .background(B.colors().white),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -31,6 +32,17 @@ fun AuthorizationScreenContent() {
             text = MultiplatformResource.strings.authorization.localize(),
             style = B.typography().text.title,
             color = B.colors().primary
+        )
+
+        InputTextField(
+            modifier = Modifier
+                .padding(horizontal = 30.dp, vertical = 40.dp),
+            hintText = "Почта@voenmeh.ru",
+            errorText = "",
+            isError = false,
+            isEnabled = true,
+            isSingleLine = true,
+            maxLength = 50
         )
     }
 }

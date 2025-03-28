@@ -72,7 +72,7 @@ fun InputTextField(
     isError: Boolean = !errorText.isNullOrBlank(),
     isEnabled: Boolean = true,
     isSingleLine: Boolean = false,
-    height: Dp = 56.dp,
+    height: Dp = 70.dp,
     textSelection: Int = 0,
     keyboardType: KeyboardType = KeyboardType.Text,
     maxLength: Int = Int.MAX_VALUE,
@@ -88,17 +88,17 @@ fun InputTextField(
     } else if (isFocused.value) {
         B.colors().primary
     } else {
-        B.colors().white
+        B.colors().primary.copy(alpha = 0.6f)
     }
 
     Box(
         modifier = modifier
             .border(
-                width = 1.dp,
+                width = 2.dp,
                 color = borderColor,
-                shape = RoundedCornerShape(5.dp)
+                shape = RoundedCornerShape(15.dp)
             )
-            .clip(RoundedCornerShape(5.dp))
+            .clip(RoundedCornerShape(15.dp))
             .background(B.colors().white)
             .heightIn(min = height)
         ,

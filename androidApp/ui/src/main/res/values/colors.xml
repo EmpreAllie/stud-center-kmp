@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryColor">#0B3367</color>
-    <color name="secondaryColor">#80000000</color>
+    <color name="secondaryColor">#1D1B1B</color>
     <color name="errorColor">#EB4C4C</color>
     <color name="green">#22FF00</color>
     <color name="freeTable">#8BFFA6</color>
+    <color name="pendingTable">#FFE28B</color>
     <color name="fullTable">#FF9595</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
