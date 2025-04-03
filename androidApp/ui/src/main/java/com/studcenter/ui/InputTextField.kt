@@ -212,7 +212,7 @@ internal fun InputTextFieldLight_Preview() {
             .background(B.colors().primary)) {
             InputTextField(
                 modifier = Modifier.
-                padding(bottom = 16.dp),
+                padding(bottom = 0.dp),
                 hintText = "Пароль",
                 isSingleLine = true,
                 errorText = "",
@@ -231,12 +231,13 @@ internal fun InputTextFieldDark_Preview() {
             .background(B.colors().primary)) {
             InputTextField(
                 modifier = Modifier.
-                padding(bottom = 16.dp),
+                padding(bottom = 0.dp),
                 hintText = "Пароль",
                 isSingleLine = true,
                 errorText = "",
                 isError = false,
                 isEnabled = true,
+
                 trailingIcon = {
                     Icon(
                         modifier = Modifier
@@ -248,6 +249,7 @@ internal fun InputTextFieldDark_Preview() {
                         contentDescription = null
                     )
                 }
+
             )
         }
     }

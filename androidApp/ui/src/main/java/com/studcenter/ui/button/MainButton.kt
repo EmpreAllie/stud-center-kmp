@@ -60,7 +60,7 @@ fun MainButton(
     contentAlignment: Alignment = Alignment.Center,
     disabledColor: Color = B.colors().secondary.invert(),
     disabledContentColor: Color = contentColor.invert(),
-    cornerShapeSize: Dp = 5.dp,
+    cornerShapeSize: Dp = 15.dp,
     onClick: () -> Unit,
 ) {
     Box(

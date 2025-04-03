@@ -28,15 +28,15 @@ data class TitleTypography(
     ).preciseLineHeight()
 
     val main: TextStyle = TextStyle(
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         lineHeight = 28.sp,
         fontFamily = regular,
-        fontWeight = FontWeight.W400
+        fontWeight = FontWeight.W500
     ).preciseLineHeight()
 
     val buttonText: TextStyle = TextStyle(
-        fontSize = 18.sp,
-        lineHeight = 22.sp,
+        fontSize = 20.sp,
+        lineHeight = 26.sp,
         fontFamily = bold,
         fontWeight = FontWeight.W400,
     )

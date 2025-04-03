@@ -7,13 +7,13 @@ $COLORS_SWIFT_FILE = "iosApp\iosApp\Resources\Colors.swift"
 
 $BUILD_DIR = "shared\resources\build"
 
-$LANGUAGE_COUNT = Read-Host "Сколько у вас языков локализации в приложении? (ответ 1 цифра)"
+$LANGUAGE_COUNT = Read-Host "How many languages does the app use? (the answer is 1 number)"
 if ($LANGUAGE_COUNT -eq 0) {
-    Write-Host "Локализация не будет выполнена, так как вы указали 0 языков."
+    Write-Host "The localization won't be done because you've specified 0 languages."
     exit 0
 }
 
-$LANGUAGES = Read-Host "Какие языки? (введите языковые коды через запятую без пробелов, например: en,ru,fr)"
+$LANGUAGES = Read-Host "What are the languages? (enter language codes with commas and without spaces, for example: en,ru,fr)"
 $LANGUAGE_CODES = $LANGUAGES -split ','
 
 $STRINGS_TARGET_PATHS = @("androidApp\ui\src\main\res\values\strings.xml")
@@ -23,26 +23,26 @@ foreach ($LANG_CODE in $LANGUAGE_CODES) {
 
 function Copy-ColorsFile {
     Copy-Item -Path $COLORS_SOURCE_FILE -Destination $COLORS_TARGET_FILE -Force
-    Write-Host "Файл $COLORS_SOURCE_FILE успешно скопирован в $COLORS_TARGET_FILE"
+    Write-Host "File $COLORS_SOURCE_FILE copied successfully to $COLORS_TARGET_FILE"
 }
 
 function Update-ColorsKt {
     $NEW_COLOR_NAME = Select-String -Path $COLORS_SOURCE_FILE -Pattern 'name="([^"]*)"' | ForEach-Object { $_.Matches.Groups[1].Value } | Select-Object -Last 1
 
     if (-not $NEW_COLOR_NAME) {
-        Write-Host "Не удалось найти новое имя цвета в $COLORS_SOURCE_FILE"
+        Write-Host "Unable to find a new color name in $COLORS_SOURCE_FILE"
         return
     }
 
-    if (Select-String -Path $COLORS_KT_FILE -Pattern "val $NEW_COLOR_NAME:") {
-        Write-Host "Цвет $NEW_COLOR_NAME уже существует в $COLORS_KT_FILE"
+    if (Select-String -Path $COLORS_KT_FILE -Pattern "val ${NEW_COLOR_NAME}:") {
+        Write-Host "Color $NEW_COLOR_NAME already exists in $COLORS_KT_FILE"
         return
     }
 
-    (Get-Content $COLORS_KT_FILE) -replace "abstract val transparent: Color", "abstract val transparent: Color`r`n    abstract val $NEW_COLOR_NAME: Color" | Set-Content $COLORS_KT_FILE
-    (Get-Content $COLORS_KT_FILE) -replace "override val transparent: Color = Color.Transparent,", "override val transparent: Color = Color.Transparent,`r`n        override val $NEW_COLOR_NAME: Color = Color(MultiplatformResource.colors.$NEW_COLOR_NAME.getColor(context))," | Set-Content $COLORS_KT_FILE
+    (Get-Content $COLORS_KT_FILE) -replace "abstract val transparent: Color", "abstract val transparent: Color`r`n    abstract val ${NEW_COLOR_NAME}: Color" | Set-Content $COLORS_KT_FILE
+    (Get-Content $COLORS_KT_FILE) -replace "override val transparent: Color = Color.Transparent,", "override val transparent: Color = Color.Transparent,`r`n        override val ${NEW_COLOR_NAME}: Color = Color(MultiplatformResource.colors.$NEW_COLOR_NAME.getColor(context))," | Set-Content $COLORS_KT_FILE
 
-    Write-Host "Цвет $NEW_COLOR_NAME успешно добавлен в $COLORS_KT_FILE"
+    Write-Host "Color $NEW_COLOR_NAME added successfully to $COLORS_KT_FILE"
 }
 
 function Copy-StringsFile {
@@ -52,37 +52,37 @@ function Copy-StringsFile {
             New-Item -ItemType Directory -Path $TARGET_DIR -Force | Out-Null
         }
         Copy-Item -Path $STRINGS_SOURCE_FILE -Destination $TARGET_FILE -Force
-        Write-Host "Файл успешно скопирован в $TARGET_FILE"
+        Write-Host "File copied successfully to $TARGET_FILE"
     }
 }
 
 function Clean-Build {
     if (Test-Path $BUILD_DIR) {
         Remove-Item -Recurse -Force $BUILD_DIR
-        Write-Host "Папка build успешно удалена."
+        Write-Host "Build folder deleted successfully."
     }
 }
 
 function Rebuild-Module {
-    Write-Host "Пересборка модуля resource..."
+    Write-Host "Rebuilding module: resource..."
     & ./gradlew :shared:resources:build
     if ($?) {
-        Write-Host "Модуль resource успешно пересобран."
+        Write-Host "Resource module rebuilt successfully."
     } else {
-        Write-Host "Ошибка при пересборке модуля resource."
+        Write-Host "Error while rebuilding resource module."
     }
 }
 
 while ($true) {
     Start-Sleep -Seconds 5
     if (Test-Path $COLORS_SOURCE_FILE) {
-        Write-Host "Файл $COLORS_SOURCE_FILE изменён. Выполняется обновление..."
+        Write-Host "File $COLORS_SOURCE_FILE was changed. Updating..."
         Copy-ColorsFile
         Update-ColorsKt
     }
 
     if (Test-Path $STRINGS_SOURCE_FILE) {
-        Write-Host "Файл $STRINGS_SOURCE_FILE изменён. Выполняется копирование..."
+        Write-Host "File $STRINGS_SOURCE_FILE was changed. Copying..."
         Copy-StringsFile
     }
 
