@@ -19,12 +19,8 @@ actual val rootModule: Module = module {
         )
     }
 
-    single { KeyValueStorage(settings = get()) }
-    single { ConfigAppProvider(keyValueStorage = get()) }
-    single { ConfigParams(keyValueStorage = get(), configAppProvider = get()) }
-
-    single {
-        RootViewModel()
-    }
-
+    singleOf(::KeyValueStorage)
+    singleOf(::ConfigAppProvider)
+    singleOf(::ConfigParams)
+    singleOf(::RootViewModel)
 }

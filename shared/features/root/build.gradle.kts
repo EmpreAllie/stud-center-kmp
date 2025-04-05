@@ -31,33 +31,23 @@ kotlin {
             implementation(projects.shared.features.base)
             implementation(projects.shared.features.splash)
             implementation(projects.shared.features.authorization)
-            implementation(libs.mokoMvvmCore)
-            implementation(libs.mokoMvvmFlow)
-            implementation(libs.mokoMvvmLiveData)
-            implementation(libs.ktorClient)
-            implementation(libs.ktorClientJson)
-            implementation(libs.ktorClientCio)
+
             implementation(libs.koinCore)
+            implementation(libs.bundles.moko.mvvm)
+            implementation(libs.bundles.ktor)
             implementation(libs.multiplatformSettings)
         }
 
         androidMain.dependencies {
-            implementation(libs.koinCore)
+            implementation(libs.multiplatformSettings)
             implementation(libs.koinAndroid)
-            implementation(libs.multiplatformSettings)
-            implementation(libs.gmsPlayServiceLocation)
-        }
-
-        iosMain.dependencies {
-            implementation(libs.koinCore)
-            implementation(libs.multiplatformSettings)
         }
     }
 }
 
 android {
     namespace = "com.studcenter.features.root"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 24
     }

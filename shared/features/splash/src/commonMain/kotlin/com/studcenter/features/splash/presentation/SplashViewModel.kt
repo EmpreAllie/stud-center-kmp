@@ -23,37 +23,28 @@ class SplashViewModel(private val splashRepository: SplashRepository): ViewModel
         update()
     }
 
-    private fun update() {
-        viewModelScope.launch {
-            try {
-                val isAuthorized = withContext(Dispatchers.IO) {
-                    splashRepository.isAuthorized()
-                }
-
-                val screen = Screen.AUTHORIZATION // TODO: if (isAuthorized) Screen.MENU else Screen.AUTHORIZATION
-
-                newScreen.update(value = screen)
-            } catch (e: Throwable) {
-                e.printStackTrace()
-
-                errorText.update(MultiplatformResource.strings.errorDescription_Template.localize())
+    private fun update() = viewModelScope.launch {
+        try {
+            if (!isActualVersionApp()) throw Throwable(MultiplatformResource.strings.versionOld.localize())
+            val isAuthorized = withContext(Dispatchers.IO) {
+                splashRepository.isAuthorized()
             }
+
+            val screen =
+                Screen.AUTHORIZATION // TODO: if (isAuthorized) Screen.MENU else Screen.AUTHORIZATION
+
+            newScreen.update(value = screen)
+        } catch (e: Throwable) {
+            e.printStackTrace()
+
+            errorText.update(MultiplatformResource.strings.errorDescription_Template.localize())
         }
     }
 
-    private suspend fun checkVersion() {
-        val isActual = splashRepository.isActualVersionApp()
-
-        if (isActual) {
-            checkAuthorized()
-        } else {
-            errorText.update(MultiplatformResource.strings.versionOld.localize())
-        }
+    private suspend fun isActualVersionApp() = withContext(Dispatchers.IO) {
+        splashRepository.isActualVersionApp()
     }
 
-    private suspend fun checkAuthorized() {
-
-    }
     public fun clearErrorText() {
         errorText.update(null)
     }

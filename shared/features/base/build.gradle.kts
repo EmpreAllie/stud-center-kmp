@@ -19,19 +19,16 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.shared)
             implementation(projects.shared.resources)
-            implementation(libs.mokoMvvmCore)
-            implementation(libs.mokoMvvmFlow)
-            implementation(libs.mokoMvvmLiveData)
-            implementation(libs.ktorClient)
-            implementation(libs.ktorClientJson)
-            implementation(libs.ktorClientCio)
+            implementation(libs.koinCore)
+            implementation(libs.bundles.moko.mvvm)
+            implementation(libs.bundles.ktor)
         }
     }
 }
 
 android {
     namespace = "com.studcenter.features.base"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 24
     }
