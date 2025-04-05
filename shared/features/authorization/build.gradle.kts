@@ -29,26 +29,18 @@ kotlin {
             implementation(projects.shared.entity)
             implementation(projects.shared.resources)
             implementation(projects.shared.features.base)
-            implementation(libs.mokoMvvmCore)
-            implementation(libs.mokoMvvmFlow)
-            implementation(libs.mokoMvvmLiveData)
-            implementation(libs.ktorClient)
-            implementation(libs.ktorClientJson)
-            implementation(libs.ktorClientCio)
+
             implementation(libs.koinCore)
-            implementation(libs.mokoNetwork)
-            implementation(libs.mokoNetworkErrors)
-            implementation(libs.mokoNetworkEngine)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+            implementation(libs.bundles.moko.mvvm)
+            implementation(libs.bundles.moko.network)
+            implementation(libs.bundles.ktor)
         }
     }
 }
 
 android {
     namespace = "com.studcenter.features.authorization"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 24
     }

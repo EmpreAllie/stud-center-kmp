@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.studcenter.android"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.studcenter.android"
         minSdk = 24
@@ -52,13 +52,9 @@ dependencies {
     implementation(projects.androidApp.features.root)
     implementation(projects.androidApp.features.screen.splash)
 
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.material)
-    implementation(libs.activityXml)
-    implementation(libs.activityCompose)
+    implementation(libs.bundles.android)
+    implementation(libs.bundles.compose)
 
-    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.tooling.preview)
 }

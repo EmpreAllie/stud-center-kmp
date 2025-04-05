@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.studcenter.features.root"
-    compileSdk = 34
+    compileSdk = 35
 
     buildFeatures {
         compose = true
@@ -26,6 +26,7 @@ android {
 }
 
 val featureModules = listOf(
+    projects.androidApp.ui,
     projects.androidApp.features.screen.splash,
     projects.androidApp.features.screen.authorization,
 )
@@ -33,6 +34,8 @@ val featureModules = listOf(
 val sharedModules = listOf(
     projects.shared.features.root,
     projects.shared.features.base,
+    projects.shared.features.splash,
+    projects.shared.features.authorization,
     projects.shared.entity,
     projects.shared.resources,
     projects.shared,
@@ -47,13 +50,12 @@ dependencies {
         implementation(module)
     }
 
-    implementation(libs.mokoMvvmCore)
-    implementation(libs.mokoMvvmFlow)
-    implementation(libs.mokoMvvmLiveData)
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.bundles.android)
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.koin.android)
+    implementation(libs.bundles.moko.mvvm)
+    implementation(libs.mokoNetworkErrors)
     implementation(libs.compose.navigation)
-    implementation(libs.material)
-    implementation(libs.koinCore)
-    implementation(libs.koinAndroid)
-    implementation(libs.google.firebase.messaging)
+
+    debugImplementation(libs.compose.ui.tooling.preview)
 }

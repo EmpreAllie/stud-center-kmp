@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.studcenter.screen.authorization"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -36,16 +36,10 @@ dependencies {
     implementation(projects.shared.features.authorization)
     implementation(projects.androidApp.ui)
 
-    implementation(libs.koinCore)
-    implementation(libs.koinAndroid)
+    implementation(libs.bundles.android)
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.koin.android)
+    implementation(libs.bundles.moko.mvvm)
     implementation(libs.mokoNetworkErrors)
-    implementation(libs.mokoMvvmCore)
-    implementation(libs.mokoMvvmFlow)
-    implementation(libs.mokoMvvmLiveData)
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
+    debugImplementation(libs.compose.ui.tooling.preview)
 }

@@ -63,5 +63,5 @@
 	<string name="notificationTitle">Student Queue</string>
 	<string name="notificationDescription">A new person has registered</string>
 	<string name="versionOld">Необходимо обновить приложения. Ваша версия устарела</string>
-	<string name="mailPrompt">Mail@voenmeh.ru</string>
+	<string name="mailPrompt">mail@voenmeh.ru</string>
 </resources>

@@ -31,39 +31,23 @@ kotlin {
     }
     
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koinCore)
-            implementation(libs.koinAndroid)
-            implementation(libs.androidx.appcompat)
-            implementation(libs.androidx.core.ktx)
-            implementation(libs.material)
-            implementation(libs.ktorClientOkHttp)
-            implementation(libs.activityXml)
-            implementation(libs.activityCompose)
-        }
         commonMain.dependencies {
             implementation(projects.shared.entity)
-            implementation(libs.ktorClient)
-            implementation(libs.ktorClientJson)
-            implementation(libs.ktorClientCio)
-            implementation(libs.kotlinSerialization)
+
+            implementation(libs.koinCore)
+            implementation(libs.bundles.moko.mvvm)
+            implementation(libs.bundles.ktor)
+            implementation(libs.bundles.moko.network)
             implementation(libs.kotlinxDateTime)
-            implementation(libs.mokoNetwork)
-            implementation(libs.mokoNetworkEngine)
-            implementation(libs.mokoNetworkErrors)
-            implementation(libs.koinCore)
+            implementation(libs.kotlinSerialization)
             implementation(libs.multiplatformSettings)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktorClientDarwin)
-            implementation(libs.koinCore)
         }
     }
 }
 
 android {
     namespace = "com.studcenter"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         minSdk = 24
         buildConfigField("int", "VERSION_CODE", "1")

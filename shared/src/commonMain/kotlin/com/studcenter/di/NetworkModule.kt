@@ -9,13 +9,11 @@ import com.studcenter.entity.DeadTokenException
 import dev.icerock.moko.network.createHttpClientEngine
 import dev.icerock.moko.network.exceptionfactory.HttpExceptionFactory
 import dev.icerock.moko.network.exceptionfactory.parser.ValidationExceptionParser
-import dev.icerock.moko.network.generated.apis.AuthenticationApi
-import dev.icerock.moko.network.generated.apis.NotificationApi
+import dev.icerock.moko.network.generated.apis.AuthorizationApi
+import dev.icerock.moko.network.generated.apis.CustomerApi
+import dev.icerock.moko.network.generated.apis.InfoApi
 import dev.icerock.moko.network.generated.apis.QueueApi
-import dev.icerock.moko.network.generated.apis.ShiftsApi
-import dev.icerock.moko.network.generated.apis.StudentApi
-import dev.icerock.moko.network.generated.apis.TablesApi
-import dev.icerock.moko.network.generated.models.TokenRefreshRequest
+import dev.icerock.moko.network.generated.models.TokenRequest
 import dev.icerock.moko.network.plugins.ExceptionPlugin
 import dev.icerock.moko.network.plugins.RefreshTokenPlugin
 import dev.icerock.moko.network.plugins.TokenPlugin
@@ -32,17 +30,12 @@ import org.koin.mp.KoinPlatform.getKoin
 val networkModule: Module = module {
     val baseUrl: String = NativeHost.getUrl()
 
-    single<Json> {
-        Json {
-            ignoreUnknownKeys = true
-        }
-    }
+    single<Json> { Json { ignoreUnknownKeys = true } }
 
     singleOf(::createHttpClient)
 
-    // Student
-    factory<StudentApi> {
-        StudentApi(
+    factory<AuthorizationApi> {
+        AuthorizationApi(
             basePath = baseUrl,
             httpClient = get(),
             json = get()
@@ -50,67 +43,37 @@ val networkModule: Module = module {
     }
 
     // Authentication
-    factory<AuthenticationApi> {
-        AuthenticationApi(
+    factory<CustomerApi> {
+        CustomerApi(
             basePath = baseUrl,
             httpClient = createHttpClient(
                 json = get(),
-                authenticationApi = null
+                authorizationApi = null
             ),
             json = get()
         )
     }
-
     // Shifts
-    factory <ShiftsApi> {
-        ShiftsApi(
+    factory<InfoApi> {
+        InfoApi(
             basePath = baseUrl,
             httpClient = get(),
             json = get()
         )
     }
-
     // Shifts
-    factory <NotificationApi> {
-        NotificationApi(
-            basePath = baseUrl,
-            httpClient = get(),
-            json = get()
-        )
-    }
-
-    // Shifts
-    factory <ShiftsApi> {
-        ShiftsApi(
-            basePath = baseUrl,
-            httpClient = get(),
-            json = get()
-        )
-    }
-
-    // Tables
-    factory <TablesApi> {
-        TablesApi(
-            basePath = baseUrl,
-            httpClient = get(),
-            json = get()
-        )
-    }
-
-    // Queue
-    factory <QueueApi> {
+    factory<QueueApi> {
         QueueApi(
             basePath = baseUrl,
             httpClient = get(),
             json = get()
         )
     }
-
 }
 
 private fun createHttpClient(
     json: Json,
-    authenticationApi: AuthenticationApi?,
+    authorizationApi: AuthorizationApi?,
 ): HttpClient {
     val keyValueStorage: KeyValueStorage = getKoin().get()
     Log("ACCESS TOKEN", keyValueStorage.accessToken.toString())
@@ -128,19 +91,19 @@ private fun createHttpClient(
 
         expectSuccess = false
 
-        if (authenticationApi != null) {
+        authorizationApi?.let { api ->
             install(RefreshTokenPlugin) {
                 isCredentialsActual = { request ->
                     request.headers["Authorization"] == keyValueStorage.accessToken?.let { "Bearer $it" }
                 }
                 updateTokenHandler = {
                     try {
-                        val response = authenticationApi.apiV1EmployeeTokensRefreshPostResponse(
-                            tokenRefreshRequest = TokenRefreshRequest(
-                                accessToken = keyValueStorage.accessToken.let { "" },
-                                refreshToken = keyValueStorage.refreshToken.let { "" },
-                            )
+                        val tokenRequest = TokenRequest(
+                            accessToken = keyValueStorage.accessToken?.ifEmpty { "" },
+                            refreshToken = keyValueStorage.refreshToken?.ifEmpty { "" },
                         )
+
+                        val response = api.refreshTokenResponse(tokenRequest)
 
                         val body = response.body()
                         keyValueStorage.accessToken = body.accessToken

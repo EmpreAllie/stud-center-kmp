@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.studcenter.ui"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -34,17 +34,10 @@ dependencies {
     implementation(projects.shared.entity)
     implementation(projects.shared.features.base)
 
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
-    implementation(libs.activityCompose)
     implementation(libs.picasso)
-    implementation(libs.material)
 
-    implementation(libs.androidx.core.ktx)
-
-    implementation(libs.mokoNetwork)
-    implementation(libs.mokoNetworkErrors)
-    implementation(libs.mokoNetworkEngine)
+    implementation(libs.bundles.android)
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.moko.network)
+    debugImplementation(libs.compose.ui.tooling.preview)
 }
