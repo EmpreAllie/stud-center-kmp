@@ -1,4 +1,4 @@
-# Student Center KMP
+# StudCenter App
 
 Mobile app for the university student center with electronic queue management. Built with Kotlin Multiplatform and Compose Multiplatform.
 
