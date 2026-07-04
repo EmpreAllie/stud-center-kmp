@@ -4,7 +4,7 @@ Mobile app for the university student center with electronic queue management. B
 
 ## Screenshots
 
-<img width="1306" height="789" alt="image" src="https://github.com/user-attachments/assets/cb6d8be2-09b8-480a-a4d3-12aa7cfc430e" />
+<img width="876" height="526" alt="image" src="https://github.com/user-attachments/assets/cb6d8be2-09b8-480a-a4d3-12aa7cfc430e" />
 
 <img width="1728" height="777" alt="image" src="https://github.com/user-attachments/assets/6d988af7-9354-49f4-adae-6a5c58e5ad74" />
 
